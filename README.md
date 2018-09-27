@@ -1,2 +1,2 @@
 # Symfony-Exam-Project
-Exam Project at OUAS Fall 2018.
+Exam Project at OAMK Autumn 2018.
