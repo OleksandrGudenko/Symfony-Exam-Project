@@ -71,6 +71,12 @@ class User
         $this->password = $Password;
         return $this;
     }
+  
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+   
     public function setFirstname(string $Firstname)
     {
         $this->firstname = $Firstname;
@@ -106,6 +112,19 @@ class User
     }
     public function getUsers(){
         return $this->firstname;
+    }
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+        return array('ROLE_USER');
+    }
+    public function getSalt()
+    {
+        return null;
+    }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 
 

@@ -116,7 +116,7 @@ CREATE TABLE `question` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `firstname` varchar(20) NOT NULL,
   `lastname` varchar(20) NOT NULL,
   `teacher` tinyint(4) NOT NULL
