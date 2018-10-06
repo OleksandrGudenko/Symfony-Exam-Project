@@ -45,14 +45,8 @@ class Answer
      */
     private $question;
 
-    /**
-     * @var bool
-     *
-     * @ORM}Column(name="correct_answer", type="boolean", nullable=false)
-     */
-    private $correct_answer;
 
-    public function setQuestion_ID(string $question_id)
+    public function setQuestion_ID(int $question_id)
     {
         $this->question_id = $question_id;
         return $this;
@@ -70,13 +64,13 @@ class Answer
         return $this->answer;
     }
 
-    public function setCorrectAnswer(string $correct_answer)
+    public function setCorrectAnswer(bool $correct_answer)
     {
-        $this->correct_answer = $correct_answer;
+        $this->correctAnswer = $correct_answer;
         return $this;
     }
     public function getCorrectAnswer(){
-        return $this->correct_answer;
+        return $this->correctAnswer;
     }
 
 }

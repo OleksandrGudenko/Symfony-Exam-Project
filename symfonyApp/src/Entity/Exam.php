@@ -48,7 +48,7 @@ class Exam
      */
     private $creator;
 
-    public function setCourse_ID(string $course_id)
+    public function setCourse_ID(int $course_id)
     {
         $this->course_id = $course_id;
         return $this;
@@ -58,7 +58,7 @@ class Exam
         return $this->course_id;
     }
 
-    public function setCreator_ID(string $creator_id)
+    public function setCreator_ID(int $creator_id)
     {
         $this->creator_id = $creator_id;
         return $this;

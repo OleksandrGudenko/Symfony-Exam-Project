@@ -49,7 +49,7 @@ class Examinstance
     private $user;
 
 
-    public function setUserID(string $user_id)
+    public function setUserID(int $user_id)
     {
         $this->user_id = $user_id;
         return $this;
@@ -59,7 +59,7 @@ class Examinstance
         return $this->user_id;
     }
 
-    public function setExamID(string $exam_id)
+    public function setExamID(int $exam_id)
     {
         $this->exam_id = $exam_id;
         return $this;
@@ -69,7 +69,7 @@ class Examinstance
         return $this->exam_id;
     }
 
-    public function setGrade(string $grade)
+    public function setGrade(int $grade)
     {
         $this->grade = $grade;
         return $this;

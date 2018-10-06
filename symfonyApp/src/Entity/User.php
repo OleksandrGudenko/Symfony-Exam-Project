@@ -101,7 +101,7 @@ class User implements UserInterface
     }
     public function setId(int $Id)
     {
-        $this->idd = $Id;
+        $this->id = $Id;
         return $this;
     }
     public function getId(){

@@ -38,7 +38,7 @@ class Question
      */
     private $course;
 
-    public function setCourseId(string $name)
+    public function setCourseId(int $name)
     {
         $this->name = $name;
         return $this;

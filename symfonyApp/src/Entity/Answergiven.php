@@ -51,5 +51,30 @@ class Answergiven
      */
     private $question;
 
+    public function setAnswerID(int $answer_id)
+    {
+        $this->answer_id = $answer_id;
+        return $this;
+    }
+    public function getAnswerID(){
+        return $this->answer_id;
+    }
 
+    public function setQuestionId(int $question_id)
+    {
+        $this->question_id = $question_id;
+        return $this;
+    }
+    public function getQuestionId(){
+        return $this->question_id;
+    }
+
+    public function setExamInstanceID(int $exam_instance_id)
+    {
+        $this->exam_instance_id = $exam_instance_id;
+        return $this;
+    }
+    public function getExamInstanceID(){
+        return $this->exam_instance_id;
+    }
 }

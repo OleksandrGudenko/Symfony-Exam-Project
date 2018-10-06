@@ -9,9 +9,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Answer;
+use App\Entity\Answergiven;
 use App\Entity\Course;
 use App\Entity\Exam;
 use App\Entity\Examinstance;
+use App\Entity\Examquestion;
 use App\Entity\Question;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -43,7 +45,7 @@ class ExamUserFixtures extends Fixture
         $manager->persist($testCourse);
 
         $phpQuestion1 = new Question();
-        $phpQuestion1->setCourse_ID(1);
+        $phpQuestion1->setCourseID(1);
         $phpQuestion1->setQuestion('1,2,3,4? How many bois are in my store?');
         $manager->persist($phpQuestion1);
 
@@ -54,15 +56,15 @@ class ExamUserFixtures extends Fixture
         $manager->persist($phpAnswer1);
 
         $phpAnswer2 = new Answer();
-        $phpAnswer2->Question_ID(1);
+        $phpAnswer2->setQuestion_ID(1);
         $phpAnswer2->setAnswer('32');
-        $phpAnswer2->setCorrect_Answer(0);
+        $phpAnswer2->setCorrectAnswer(1);
         $manager->persist($phpAnswer2);
 
         $phpAnswer3 = new Answer();
         $phpAnswer3->setQuestion_ID(1);
         $phpAnswer3->setAnswer('7');
-        $phpAnswer3->setCorrectAnswer(0);
+        $phpAnswer3->setCorrectAnswer(1);
         $manager->persist($phpAnswer3);
 
         $phpExam1 = new Exam();
@@ -77,7 +79,16 @@ class ExamUserFixtures extends Fixture
         $phpExamInstance1->setGrade('3');
         $manager->persist($phpExamInstance1);
 
-        //  $phpAnswerGiven
+        $phpExamQuestion1 = new Examquestion();
+        $phpExamQuestion1->setQuestionID(1);
+        $phpExamQuestion1->setExamId(1);
+        $manager->persist($phpExamQuestion1);
+
+        $phpAnswerGiven1 = new Answergiven();
+        $phpAnswerGiven1->setAnswerID(1);
+        $phpAnswerGiven1->setQuestionId(1);
+        $phpAnswerGiven1->setExamInstanceID(1);
+        $manager->persist($phpAnswerGiven1);
 
         $manager->flush();
     }

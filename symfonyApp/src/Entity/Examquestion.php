@@ -41,5 +41,21 @@ class Examquestion
      */
     private $question;
 
+        public function setQuestionID(int $Questionid)
+    {
+        $this->question_id = $Questionid;
+        return $this;
+    }
+    public function getQuestionID(){
+        return $this->question_id;
+    }
 
+    public function setExamID(int $Examid)
+    {
+        $this->exam_id = $Examid;
+        return $this;
+    }
+    public function getexamID(){
+        return $this->exam_id;
+    }
 }
