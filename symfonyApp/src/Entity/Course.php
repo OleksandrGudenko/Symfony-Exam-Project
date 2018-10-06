@@ -28,5 +28,15 @@ class Course
      */
     private $name;
 
+    public function setCourseName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getCourseName()
+    {
+        return $this->name;
+    }
 
 }

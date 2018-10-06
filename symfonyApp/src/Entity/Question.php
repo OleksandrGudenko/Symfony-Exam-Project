@@ -24,9 +24,9 @@ class Question
     /**
      * @var int
      *
-     * @ORM\Column(name="correct_answer_id", type="integer", nullable=false)
+     * @ORM\Column(name="course_id", type="integer", nullable=false)
      */
-    private $correctAnswerId;
+    private $course_id;
 
     /**
      * @var string
@@ -45,5 +45,26 @@ class Question
      */
     private $course;
 
+    public function setCourseId(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getCourseID()
+    {
+        return $this->name;
+    }
+
+    public function setQuestion(string $question)
+    {
+        $this->question = $question;
+        return $this;
+    }
+
+    public function getQuestion()
+    {
+        return $this->question;
+    }
 
 }

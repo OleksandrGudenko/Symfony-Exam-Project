@@ -49,4 +49,33 @@ class Examinstance
     private $user;
 
 
+    public function setUserID(string $user_id)
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+    public function getUserID()
+    {
+        return $this->user_id;
+    }
+
+    public function setExamID(string $exam_id)
+    {
+        $this->exam_id = $exam_id;
+        return $this;
+    }
+    public function getExamID()
+    {
+        return $this->exam_id;
+    }
+
+    public function setGrade(string $grade)
+    {
+        $this->grade = $grade;
+        return $this;
+    }
+    public function getGrade()
+    {
+        return $this->grade;
+    }
 }

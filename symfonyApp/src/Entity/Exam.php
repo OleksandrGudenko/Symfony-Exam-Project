@@ -45,5 +45,31 @@ class Exam
      */
     private $course;
 
+    public function setCourse_ID(string $course_id)
+    {
+        $this->course_id = $course_id;
+        return $this;
+    }
+    public function getCourse_ID()
+    {
+        return $this->course_id;
+    }
 
+    public function setCreator_ID(string $creator_id)
+    {
+        $this->creator_id = $creator_id;
+        return $this;
+    }
+    public function getCreator_ID(){
+        return $this->creator_id;
+    }
+
+    public function setExamName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+    public function getExamName(){
+        return $this->name;
+    }
 }
