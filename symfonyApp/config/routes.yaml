@@ -6,6 +6,10 @@ users:
     path: /users
     controller: App\Controller\TeacherController::users
 
+courses:
+    path: /courses/{userId}
+    controller: App\Controller\CourseController::courses
+
 login:
     path: /login
 

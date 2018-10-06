@@ -23,7 +23,6 @@ class ExamUserFixtures extends Fixture
     {
 
         $teacherUser = new User();
-        $teacherUser->setId(1);
         $teacherUser->setUsername('Teacher');
         $teacherUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
         $teacherUser->setFirstname('Teacherfn');
@@ -32,7 +31,6 @@ class ExamUserFixtures extends Fixture
         $manager->persist($teacherUser);
 
         $studentUser = new User();
-        $studentUser->setId(2);
         $studentUser->setUsername('Student');
         $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
         $studentUser->setFirstname('Studentfn');
@@ -79,11 +77,8 @@ class ExamUserFixtures extends Fixture
         $phpExamInstance1->setGrade('3');
         $manager->persist($phpExamInstance1);
 
-      //  $phpAnswerGiven
+        //  $phpAnswerGiven
 
         $manager->flush();
     }
-
 }
-
-#password_hash(password: 'test_password', algo: PASSWORD_BCRYPT))

@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * User
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})})
  * @ORM\Entity
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -62,7 +65,8 @@ class User
         $this->username = $username;
         return $this;
     }
-    public function getUsername(){
+    public function getUsername()
+    {
         return $this->username;
     }
 
@@ -82,7 +86,8 @@ class User
         $this->firstname = $Firstname;
         return $this;
     }
-    public function getFirstname(){
+    public function getFirstname()
+    {
         return $this->firstname;
     }
 
@@ -115,8 +120,7 @@ class User
     }
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
-        return array('ROLE_USER');
+       return array('ROLE_USER');
     }
     public function getSalt()
     {
