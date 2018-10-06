@@ -17,18 +17,24 @@ class ExamUserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        $dummyUser = new User();
-        $dummyUser->setUsername('TestUser');
-        $dummyUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
-        $dummyUser->setFirstname('Jamie');
-        $dummyUser->setLastname('Burns');
-        $dummyUser->setId('0');
-        $dummyUser->setTeacher('1');
-        $manager->persist($dummyUser);
+        $teacherUser = new User();
+        $teacherUser->setUsername('Teacher');
+        $teacherUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $teacherUser->setFirstname('Teacherfn');
+        $teacherUser->setLastname('Teacherln');
+        $teacherUser->setTeacher('1');
+        $manager->persist($teacherUser);
+
+        $studentUser = new User();
+        $studentUser->setUsername('Student');
+        $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $studentUser->setFirstname('Studentfn');
+        $studentUser->setLastname('Studentln');
+        $studentUser->setTeacher('0');
+        $manager->persist($studentUser);
+
 
 
         $manager->flush();
     }
 }
-
-#password_hash(password: 'test_password', algo: PASSWORD_BCRYPT))

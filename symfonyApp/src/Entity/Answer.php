@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Answer
  *
- * @ORM\Table(name="answer", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="answer_question_id_idx", columns={"question_id"})})
+ * @ORM\Table(name="Answer", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="answer_question_id_idx", columns={"question_id"})})
  * @ORM\Entity
  */
 class Answer
@@ -27,6 +27,13 @@ class Answer
      * @ORM\Column(name="answer", type="string", length=255, nullable=false)
      */
     private $answer;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="correct_answer", type="boolean", nullable=false)
+     */
+    private $correctAnswer;
 
     /**
      * @var \Question
