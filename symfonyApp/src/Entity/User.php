@@ -59,44 +59,51 @@ class User implements UserInterface
      */
     private $teacher;
 
-
-    public function setUsername(string $username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+
         return $this;
     }
-    public function getUsername()
+
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setPassword(string $Password)
+    public function setPassword(string $password): self
     {
-        $this->password = $Password;
+        $this->password = $password;
+
         return $this;
     }
-  
-    public function getPassword()
+
+    public function getPassword(): ?string
     {
         return $this->password;
     }
-   
-    public function setFirstname(string $Firstname)
+
+    public function setFirstname(string $firstname): self
     {
-        $this->firstname = $Firstname;
+        $this->firstname = $firstname;
+
         return $this;
     }
-    public function getFirstname()
+
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    public function setLastname(string $Lastname)
+    public function setLastname(string $lastname): self
     {
-        $this->lastname = $Lastname;
+        $this->lastname = $lastname;
+
         return $this;
     }
-    public function getLastname(){
+
+    public function getLastname(): ?string
+    {
         return $this->lastname;
     }
     public function setId(int $Id)
@@ -104,15 +111,21 @@ class User implements UserInterface
         $this->id = $Id;
         return $this;
     }
-    public function getId(){
+
+    public function getId(): ?int
+    {
         return $this->id;
     }
-    public function setTeacher(bool $Teacher)
+
+    public function setTeacher(bool $teacher): self
     {
-        $this->teacher = $Teacher;
+        $this->teacher = $teacher;
+
         return $this;
     }
-    public function getTeacher(){
+
+    public function getTeacher(): ?bool
+    {
         return $this->teacher;
     }
     public function getUsers(){

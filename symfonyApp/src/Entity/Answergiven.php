@@ -77,4 +77,45 @@ class Answergiven
     public function getExamInstanceID(){
         return $this->exam_instance_id;
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getExamInstance(): ?Examinstance
+    {
+        return $this->examInstance;
+    }
+
+    public function setExamInstance(?Examinstance $examInstance): self
+    {
+        $this->examInstance = $examInstance;
+
+        return $this;
+    }
+
+    public function getAnswer(): ?Answer
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(?Answer $answer): self
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Examquestion
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Examquestion $question): self
+    {
+        $this->question = $question;
+
+        return $this;
+    }
 }

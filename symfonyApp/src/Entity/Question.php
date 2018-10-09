@@ -38,20 +38,21 @@ class Question
      */
     private $course;
 
-    public function setCourseId(int $name)
+    public function setCourse($course)
     {
-        $this->name = $name;
+        $this->course = $course;
         return $this;
     }
 
-    public function getCourseID()
+    public function getCourse()
     {
-        return $this->name;
+        return $this->course;
     }
 
     public function setQuestion(string $question)
     {
         $this->question = $question;
+
         return $this;
     }
 
@@ -59,5 +60,12 @@ class Question
     {
         return $this->question;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
 
 }

@@ -46,31 +46,48 @@ class Answer
     private $question;
 
 
-    public function setQuestion_ID(int $question_id)
-    {
-        $this->question_id = $question_id;
-        return $this;
-    }
-    public function getQuestion_ID(){
-        return $this->question_id;
-    }
 
     public function setAnswer(string $answer)
     {
         $this->answer = $answer;
+
         return $this;
     }
-    public function getAnswer(){
+
+    public function getAnswer()
+    {
         return $this->answer;
     }
 
-    public function setCorrectAnswer(bool $correct_answer)
+    public function setCorrectAnswer(bool $correctAnswer)
     {
-        $this->correctAnswer = $correct_answer;
+        $this->correctAnswer = $correctAnswer;
+
         return $this;
     }
-    public function getCorrectAnswer(){
+
+    public function getCorrectAnswer()
+    {
         return $this->correctAnswer;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+
 
 }

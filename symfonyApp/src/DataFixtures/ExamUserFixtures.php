@@ -8,19 +8,21 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Answer;
 use App\Entity\Answergiven;
-use App\Entity\Course;
 use App\Entity\Exam;
 use App\Entity\Examinstance;
 use App\Entity\Examquestion;
-use App\Entity\Question;
 use App\Entity\User;
+use App\Entity\Course;
+use App\Entity\Question;
+use App\Entity\Answer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+
 class ExamUserFixtures extends Fixture
 {
+
     public function load(ObjectManager $manager)
     {
 
@@ -45,31 +47,32 @@ class ExamUserFixtures extends Fixture
         $manager->persist($testCourse);
 
         $phpQuestion1 = new Question();
-        $phpQuestion1->setCourseID(1);
-        $phpQuestion1->setQuestion('1,2,3,4? How many bois are in my store?');
+        $phpQuestion1->setCourse($testCourse);
+        $phpQuestion1->setQuestion('1,2,3,4? How many people are in my store?');
         $manager->persist($phpQuestion1);
 
         $phpAnswer1 = new Answer();
-        $phpAnswer1->setQuestion_ID(1);
+        $phpAnswer1->setQuestion($phpQuestion1);
         $phpAnswer1->setAnswer('3');
         $phpAnswer1->setCorrectAnswer(1);
         $manager->persist($phpAnswer1);
 
         $phpAnswer2 = new Answer();
-        $phpAnswer2->setQuestion_ID(1);
+        $phpAnswer2->setQuestion($phpQuestion1);
         $phpAnswer2->setAnswer('32');
-        $phpAnswer2->setCorrectAnswer(1);
+        $phpAnswer2->setCorrectAnswer(0);
         $manager->persist($phpAnswer2);
 
         $phpAnswer3 = new Answer();
-        $phpAnswer3->setQuestion_ID(1);
+        $phpAnswer3->setQuestion($phpQuestion1);
         $phpAnswer3->setAnswer('7');
-        $phpAnswer3->setCorrectAnswer(1);
+        $phpAnswer3->setCorrectAnswer(0);
         $manager->persist($phpAnswer3);
 
+
         $phpExam1 = new Exam();
-        $phpExam1->setCourse_ID(1);
-        $phpExam1->setCreator_ID(1);
+        $phpExam1->setCourse(1);
+        $phpExam1->setCreator(1);
         $phpExam1->setExamName('Last time Bob');
         $manager->persist($phpExam1);
 
@@ -92,4 +95,5 @@ class ExamUserFixtures extends Fixture
 
         $manager->flush();
     }
+
 }

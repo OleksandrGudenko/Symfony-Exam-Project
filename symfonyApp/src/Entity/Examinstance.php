@@ -69,13 +69,44 @@ class Examinstance
         return $this->exam_id;
     }
 
-    public function setGrade(int $grade)
+    public function setGrade(?int $grade): self
     {
         $this->grade = $grade;
+
         return $this;
     }
-    public function getGrade()
+
+    public function getGrade(): ?int
     {
         return $this->grade;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getExam(): ?Exam
+    {
+        return $this->exam;
+    }
+
+    public function setExam(?Exam $exam): self
+    {
+        $this->exam = $exam;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
