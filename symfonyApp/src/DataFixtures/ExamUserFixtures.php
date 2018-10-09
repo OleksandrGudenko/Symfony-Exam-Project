@@ -69,28 +69,27 @@ class ExamUserFixtures extends Fixture
         $phpAnswer3->setCorrectAnswer(0);
         $manager->persist($phpAnswer3);
 
-
         $phpExam1 = new Exam();
-        $phpExam1->setCourse(1);
-        $phpExam1->setCreator(1);
+        $phpExam1->setCourse($testCourse);
+        $phpExam1->setCreator($teacherUser);
         $phpExam1->setExamName('Last time Bob');
         $manager->persist($phpExam1);
 
         $phpExamInstance1 = new Examinstance();
-        $phpExamInstance1->setUserID(2);
-        $phpExamInstance1->setExamID(1);
+        $phpExamInstance1->setUser($studentUser);
+        $phpExamInstance1->setExam($phpExam1);
         $phpExamInstance1->setGrade('3');
         $manager->persist($phpExamInstance1);
 
         $phpExamQuestion1 = new Examquestion();
-        $phpExamQuestion1->setQuestionID(1);
-        $phpExamQuestion1->setExamId(1);
+        $phpExamQuestion1->setQuestion($phpQuestion1);
+        $phpExamQuestion1->setExam($phpExam1);
         $manager->persist($phpExamQuestion1);
 
         $phpAnswerGiven1 = new Answergiven();
-        $phpAnswerGiven1->setAnswerID(1);
-        $phpAnswerGiven1->setQuestionId(1);
-        $phpAnswerGiven1->setExamInstanceID(1);
+        $phpAnswerGiven1->setAnswer($phpAnswer3);
+        $phpAnswerGiven1->setQuestion($phpExamQuestion1);
+        $phpAnswerGiven1->setExamInstance($phpExamInstance1);
         $manager->persist($phpAnswerGiven1);
 
         $manager->flush();
