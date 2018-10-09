@@ -15,17 +15,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 
 class TeacherController extends AbstractController
-
 {
     public function users(Request $request)
     {
-
-
         $listData = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('users/list.html.twig',
             array('listData' => $listData ));
-
-
     }
 }

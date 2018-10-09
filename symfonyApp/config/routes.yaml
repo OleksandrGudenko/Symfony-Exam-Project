@@ -6,9 +6,43 @@ users:
     path: /users
     controller: App\Controller\TeacherController::users
 
+#Courses
 courses:
-    path: /courses/{userId}
+    path: /courses
     controller: App\Controller\CourseController::courses
+
+editCourse:
+    path: /courses/edit/{courseId}
+    controller: App\Controller\CourseController::editCourse
+
+deleteCourse:
+    path: /courses/delete/{courseId}
+    controller: App\Controller\CourseController::deleteCourse
+#End Courses
+
+#Exams
+exams:
+    path: /courses/exams
+    controller: App\Controller\ExamController::exams
+
+publishExam:
+    path: /courses/exams/publish/{examId}
+    controller: App\Controller\ExamController::publishExam
+
+editExam:
+    path: /courses/exams/edit/{examId}
+    controller: App\Controller\ExamController::editExam
+
+deleteExam:
+    path: /courses/exams/delete/{examId}
+    controller: App\Controller\ExamController::deleteExam
+#End Exams
+
+#Students
+students:
+    path: /students
+    controller: App\Controller\StudentController::students
+#End Students
 
 login:
     path: /login
