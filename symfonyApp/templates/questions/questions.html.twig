@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <div class="container" align="center">
+        <h3>Questions</h3>
+
+        <div align="left">Hello</div>
+
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <th>ID</th>
+            <th>Course ID</th>
+            <th>Question</th>
+            <th>View Exams</th>'
+            <th>View Questions</th>
+            </thead>
+            {% for course in listData %}
+                <tbody>
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td>{{ question.course_id }} </td>
+                    <td>{{ question.question }}</td>
+                    <td><button class="btn btn-warning">Edit Question</button></td>
+                    <td><button class="btn btn-danger">Delete Questions</button></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

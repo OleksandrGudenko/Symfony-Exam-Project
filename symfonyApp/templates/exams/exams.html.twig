@@ -1,11 +1,47 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Exams Overview {% endblock %}
+
 {% block stylesheets %}
     <link href="{{ asset('css/list.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block body %}
+<div class="container" align="center">
+    <h3>Exams</h3>
 
-    Exams
+<div align="left">Hello, {{ user.username }}</div>
 
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Creator</th>
+        <th>Course</th>
+        <th>Username</th>
+        <th>Publish</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Do</th>
+        <th>View Results</th>
+        </thead>
+    {% for exam in listData %}
+        <tbody>
+        <tr>
+            <td>{{ exam.id }}</td>
+            <td>{{ exam.name }} </td>
+            <td>{{ exam.creator.username }} </td>
+            <td>{{ exam.course.name }} </td>
+            <td>{{ user.username }} </td>
+            <td><button class="btn btn-primary">Publish</button></td>
+            <td><button class="btn btn-warning">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+            <td><button class="btn btn-warning">Do</button></td>
+            <td><button class="btn btn-primary">View Result</button></td>
+        </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+</div>
 {% endblock %}

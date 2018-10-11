@@ -6,6 +6,32 @@
 
 {% block body %}
 
-    Courses
+
+    <div class="container" align="center">
+        <h3>Courses</h3>
+
+        <div align="left">Hello</div>
+
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <th>ID</th>
+            <th>Name</th>
+            <th>View Exams</th>'
+            <th>View Questions</th>
+
+            </thead>
+            {% for course in listData %}
+                <tbody>
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.name }} </td>
+                    <td><button class="btn btn-primary">View Exams</button></td>
+                    <td><button class="btn btn-primary">View Questions</button></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
 
 {% endblock %}
