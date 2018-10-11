@@ -6,6 +6,23 @@
 
 {% block body %}
 
-    Courses
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in listData %}
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

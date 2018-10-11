@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ExamController extends AbstractController
 {
-    public function exams()
+    public function exams($courseId)
     {
-        $listData = $this->getDoctrine()->getRepository(Exam::class)->findAll();
+        $listData = $this->getDoctrine()->getRepository(Exam::class)->findBy(['course' => $courseId]);
 
         return $this->render('exams/exams.html.twig',
             array('listData' => $listData ));

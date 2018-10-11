@@ -46,6 +46,10 @@ class ExamUserFixtures extends Fixture
         $testCourse->setCourseName('PHP');
         $manager->persist($testCourse);
 
+        $testCourse1 = new Course();
+        $testCourse1->setCourseName('Finnish');
+        $manager->persist($testCourse1);
+
         $phpQuestion1 = new Question();
         $phpQuestion1->setCourse($testCourse);
         $phpQuestion1->setQuestion('1,2,3,4? How many people are in my store?');
@@ -74,6 +78,12 @@ class ExamUserFixtures extends Fixture
         $phpExam1->setCreator($teacherUser);
         $phpExam1->setExamName('Last time Bob');
         $manager->persist($phpExam1);
+
+        $phpExam2 = new Exam();
+        $phpExam2->setCourse($testCourse1);
+        $phpExam2->setCreator($teacherUser);
+        $phpExam2->setExamName('Finnish exam');
+        $manager->persist($phpExam2);
 
         $phpExamInstance1 = new Examinstance();
         $phpExamInstance1->setUser($studentUser);
