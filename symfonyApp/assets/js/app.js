@@ -37,3 +37,4 @@ deleteButtons.forEach(button => button.addEventListener('click', deleteButtonCli
 
 let isDoneButtons = document.querySelectorAll('.completeButton');
 isDoneButtons.forEach(button => button.addEventListener('click', completeButtonClicked));
+

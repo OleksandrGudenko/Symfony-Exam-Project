@@ -22,7 +22,7 @@ deleteCourse:
 
 #Exams
 exams:
-    path: /courses/exams
+    path: /courses/exams/{courseId}
     controller: App\Controller\ExamController::exams
 
 publishExam:
@@ -36,6 +36,12 @@ editExam:
 deleteExam:
     path: /courses/exams/delete/{examId}
     controller: App\Controller\ExamController::deleteExam
+
+takeExam:
+    path: /courses/exams/take/{examId}
+    controller: App\Controller\ExamController::takeExam
+
+
 #End Exams
 
 #Students

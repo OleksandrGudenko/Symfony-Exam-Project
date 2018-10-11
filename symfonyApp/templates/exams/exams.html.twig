@@ -6,6 +6,19 @@
 
 {% block body %}
 
-    Exams
+    <h3>Exams</h3>
+    <tr>Hello {{ user.username }}</tr>
+
+    {% for exam in listData %}
+        <tr>
+            <td>{{ exam.id }}</td>
+            <td>{{ exam.name }} </td>
+            <td>{{ exam.creator.username }} </td>
+            <td>{{ exam.course.name }} </td>
+            <td>{{ user.username }} </td>
+
+
+        </tr>
+    {% endfor %}
 
 {% endblock %}
