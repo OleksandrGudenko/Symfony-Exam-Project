@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 
-{% block body %}
+{% block mian %}
 
 
-    <div class="container" align="center">
+    <div  align="center">
         <h3>Questions</h3>
 
         <div align="left">Hello</div>
@@ -18,11 +18,11 @@
             <th>View Exams</th>'
             <th>View Questions</th>
             </thead>
-            {% for course in listData %}
+            {% for question in listData %}
                 <tbody>
                 <tr>
-                    <td>{{ course.id }}</td>
-                    <td>{{ question.course_id }} </td>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.course.id }} </td>
                     <td>{{ question.question }}</td>
                     <td><button class="btn btn-warning">Edit Question</button></td>
                     <td><button class="btn btn-danger">Delete Questions</button></td>

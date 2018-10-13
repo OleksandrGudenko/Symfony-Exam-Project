@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block loggedin %}
 
 
     <h2 class="PageTitle">Login Form</h2>
@@ -10,7 +10,7 @@
             <img src="pictures/img_avatar2.png" alt="Avatar" class="avatar">
         </div>
 
-        <div class="container">
+        <div>
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username "id="username" name="_username" required>
 
@@ -20,6 +20,5 @@
             <button class="login-btn" type="submit">Login</button>
         </div>
     </form>
-
 
 {% endblock %}

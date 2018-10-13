@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('css/list.css') }}" rel="stylesheet" />
-{% endblock %}
+{% block main %}
 
-{% block body %}
+    <div class="main" align="center">
+        <h3>Students</h3>
+        <br>
+        <table class="table table-hover table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+            </thead>
+            {% for students in students %}
+                <tbody>
+                <tr>
+                    <td scope="row">{{ students.id }}</td>
+                    <td>{{ students.firstname }} </td>
+                    <td>{{ students.lastname }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
 
-    Students
 
 {% endblock %}

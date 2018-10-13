@@ -45,8 +45,6 @@ class Answer
      */
     private $question;
 
-
-
     public function setAnswer(string $answer)
     {
         $this->answer = $answer;

@@ -38,6 +38,19 @@ class Question
      */
     private $course;
 
+    private $answers;
+
+    public function setAnswers($answers)
+    {
+        $this->answers = $answers;
+        return $this;
+    }
+
+    public function answers()
+    {
+        return $this->answers;
+    }
+
     public function setCourse($course)
     {
         $this->course = $course;
