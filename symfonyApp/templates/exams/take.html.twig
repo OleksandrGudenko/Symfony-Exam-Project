@@ -8,11 +8,9 @@
         {% for question in instance.exam.questions %}
             <p>{{ question.question }}</p>
                 {% for answer in question.answers %}
-
-                        <div class="radio">
-                            <label><input type="radio" name="question{{ answer.question.id}}" value="answer{{ answer.id }}">{{ answer.answer }}</label>
-                        </div>
-
+                    <div class="radio">
+                        <label><input type="radio" name="question{{ answer.question.id}}" value="answer{{ answer.id }}">{{ answer.answer }}</label>
+                    </div>
                 {% endfor %}
             <br><br>
         {% endfor %}
