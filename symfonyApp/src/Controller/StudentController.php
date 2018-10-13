@@ -13,6 +13,6 @@ class StudentController extends AbstractController
         $listData = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('students/students.html.twig',
-            array('listData' => $listData ));
+            array('students' => $listData ));
     }
 }

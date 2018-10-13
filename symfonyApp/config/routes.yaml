@@ -38,7 +38,7 @@ deleteExam:
     controller: App\Controller\ExamController::deleteExam
 
 takeExam:
-    path: /courses/exams/take/olek/{examId}
+    path: /courses/exams/take/{examId}
     controller: App\Controller\ExamController::takeExam
 #End Exams
 
