@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Exam
@@ -48,6 +49,19 @@ class Exam
      */
     private $creator;
 
+    private $questions;
+
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+        return $this;
+    }
+
+    public function questions()
+    {
+        return $this->questions;
+    }
+
     public function setCourse_ID(int $course_id)
     {
         $this->course_id = $course_id;
@@ -55,7 +69,7 @@ class Exam
     }
     public function getCourse_ID()
     {
-        return $this->course_id;
+        return $this->course;
     }
 
     public function setCreator_ID(int $creator_id)

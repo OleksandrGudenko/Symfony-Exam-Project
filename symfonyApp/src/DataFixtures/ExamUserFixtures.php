@@ -46,6 +46,10 @@ class ExamUserFixtures extends Fixture
         $testCourse->setCourseName('PHP');
         $manager->persist($testCourse);
 
+        $testCourse1 = new Course();
+        $testCourse1->setCourseName('Finnish');
+        $manager->persist($testCourse1);
+
         $phpQuestion1 = new Question();
         $phpQuestion1->setCourse($testCourse);
         $phpQuestion1->setQuestion('What animal is the symbol for PHP?');
@@ -97,12 +101,6 @@ class ExamUserFixtures extends Fixture
         $phpExam1->setCreator($teacherUser);
         $phpExam1->setExamName('1st Exam for PHP');
         $manager->persist($phpExam1);
-
-        $phpExam2 = new Exam();
-        $phpExam2->setCourse($testCourse);
-        $phpExam2->setCreator($teacherUser);
-        $phpExam2->setExamName('2nd Exam for PHP');
-        $manager->persist($phpExam2);
 
         $phpExamInstance1 = new Examinstance();
         $phpExamInstance1->setUser($studentUser);

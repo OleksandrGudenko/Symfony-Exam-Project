@@ -11,14 +11,19 @@ courses:
     path: /courses
     controller: App\Controller\CourseController::courses
 
-editCourse:
-    path: /courses/edit/{courseId}
-    controller: App\Controller\CourseController::editCourse
-
-deleteCourse:
-    path: /courses/delete/{courseId}
-    controller: App\Controller\CourseController::deleteCourse
 #End Courses
+
+#Questions
+
+questions:
+    path: /courses/questions/{courseId}
+    controller: App\Controller\QuestionController:questions
+
+editQuestion:
+    path: /courses/questions/edit/{questionId}
+    controller: App\Controller\QuestionController::editQuestion
+
+#End Questions
 
 #Exams
 exams:
@@ -40,6 +45,9 @@ deleteExam:
 takeExam:
     path: /courses/exams/take/{examId}
     controller: App\Controller\ExamController::takeExam
+
+viewExam:
+    path: /courses/exams/view/{examId}
 #End Exams
 
 #Students
