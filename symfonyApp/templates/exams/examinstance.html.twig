@@ -5,14 +5,20 @@
   <h3>{{ name }}</h3>
 
     <div class="container">
-        <form action="#" method="post">
+
         {% for e in exam %}
             <p>{{ e.question.question }}</p>
 
                 {% for a in answers %}
                     {%  if a.question.id == e.question.id %}
                         <div class="radio">
-                            <label><input type="radio" name="question{{ a.question.id}}" value="answer{{ a.id }}">{{ a.answer }}</label>
+                            <label>
+                                <input type="radio"
+                                        id="answer{{ a.id }}"
+                                        name="{{ a.question.id}}"
+                                        value="{{ a.id }}"
+                                >       {{ a.answer }}
+                            </label>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -20,8 +26,8 @@
 
             <br><br>
         {% endfor %}
-            <input type="submit">
-        </form>
+        <button id="submitButton">Submit</button>
+
 
     </div>
 

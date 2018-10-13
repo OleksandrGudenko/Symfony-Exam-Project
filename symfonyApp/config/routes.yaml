@@ -37,9 +37,16 @@ deleteExam:
     path: /courses/exams/delete/{examId}
     controller: App\Controller\ExamController::deleteExam
 
+#Testing
 takeExam:
     path: /courses/exams/take/olek/{examId}
     controller: App\Controller\ExamController::takeExam
+
+completeExam:
+  path: /complete
+  controller: App\Controller\ExamController::completeExam
+  methods: [POST]
+#End Testing
 #End Exams
 
 #Students

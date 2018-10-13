@@ -10,31 +10,72 @@ require('../css/app.css');
 require('../images/todo.ico');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+//var $ = require('jquery');
 
 import axios from 'axios';
 
 
-function deleteButtonClicked(event)
-{
-    
-    const itemId = event.target.getAttribute('data-id');
+window.onload=function() {
 
-    // send the HTTP REQ
-    axios.delete('/todoList/deleteItem/' + itemId)
-        .then(response => window.location.href = window.location.href);
-}
+    function submitButtonClicked() {
 
-function completeButtonClicked(event)
-{
-    const itemId = event.target.getAttribute('data-id');
-    axios.post('/todoList/item/' + itemId + '/toggleIsDone')
-        .then(response => window.location.href = window.location.href);
-}
+        let question1 = document.getElementsByName('1'),
+            answer1 = '', i = 0;
 
-let deleteButtons = document.querySelectorAll('.deleteButton');
-deleteButtons.forEach(button => button.addEventListener('click', deleteButtonClicked));
+        for( ; i < question1.length; i++ )
+        {
+            if( question1[i].checked ) {
+                answer1 = question1[i].value;
+                break;
+            }
+        }
 
-let isDoneButtons = document.querySelectorAll('.completeButton');
-isDoneButtons.forEach(button => button.addEventListener('click', completeButtonClicked));
+        let question2 = document.getElementsByName('2'),
+            answer2 = '', j = 0;
 
+        for( ; j < question2.length; j++ )
+        {
+            if( question2[j].checked ) {
+                answer2 = question2[j].value;
+                break;
+            }
+
+        }
+
+        let question3 = document.getElementsByName('3'),
+            answer3 = '', k = 0;
+
+        for( ; k < question3.length; k++ )
+        {
+            if( question3[k].checked ) {
+                answer3 = question2[k].value;
+                break;
+            }
+
+        }
+
+
+        axios({
+            method: 'post',
+            url: '/complete',
+            data: {
+                q1: answer1,
+                q2: answer2,
+                q3: answer3
+            }
+        }).then(response => window.location.href = '/complete');
+
+    }
+
+
+    document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
+
+};
+
+/*
+axios.post('/complete', { params: {
+         'user' : 1, 'question1' : answer1,'question2' : answer2}
+            })
+            .then(response => window.location.href = window.location.href);
+
+*/
