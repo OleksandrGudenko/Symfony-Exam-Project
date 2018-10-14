@@ -10,31 +10,49 @@ require('../css/app.css');
 require('../images/todo.ico');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+//var $ = require('jquery');
 
 import axios from 'axios';
 
 
-function deleteButtonClicked(event)
-{
-    
-    const itemId = event.target.getAttribute('data-id');
+window.onload=function() {
 
-    // send the HTTP REQ
-    axios.delete('/todoList/deleteItem/' + itemId)
-        .then(response => window.location.href = window.location.href);
-}
+    function submitButtonClicked() {
 
-function completeButtonClicked(event)
-{
-    const itemId = event.target.getAttribute('data-id');
-    axios.post('/todoList/item/' + itemId + '/toggleIsDone')
-        .then(response => window.location.href = window.location.href);
-}
+        let question = [];
+        let answer = [];
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; ++i) {
+            if (inputs[i].checked) {
+                question.push(inputs[i].id);
+                answer.push(inputs[i].value);
 
-let deleteButtons = document.querySelectorAll('.deleteButton');
-deleteButtons.forEach(button => button.addEventListener('click', deleteButtonClicked));
+            }
+        }
+        let r =  {};
+        for (let j = 0; j < question.length; j++) {
+            r[question[j]] = answer[j];
+        }
 
-let isDoneButtons = document.querySelectorAll('.completeButton');
-isDoneButtons.forEach(button => button.addEventListener('click', completeButtonClicked));
+        let instance = document.getElementById("instanceId").value;
 
+console.log("InstanceBoi", instance);
+console.log("Q&A",question, answer);
+console.log("Result",r);
+
+        axios.post('/complete',{ r })//.then(response => window.location =  '/complete');
+
+    }
+
+
+    document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
+
+};
+
+/*
+axios.post('/complete', { params: {
+         'user' : 1, 'question1' : answer1,'question2' : answer2}
+            })
+            .then(response => window.location.href = window.location.href);
+
+*/

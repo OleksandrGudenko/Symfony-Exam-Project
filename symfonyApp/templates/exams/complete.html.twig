@@ -1,0 +1,10 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% for x in data %}
+         <td>{{ x }}</td>
+    {% endfor %}
+     {{ dump(data) }}
+{% endblock %}

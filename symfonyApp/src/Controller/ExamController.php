@@ -4,15 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Exam;
+use App\Entity\Examquestion;
+use App\Entity\Answergiven;
 use App\Entity\Examinstance;
 use App\Entity\Question;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExamController extends AbstractController
@@ -69,33 +67,59 @@ class ExamController extends AbstractController
     {
         $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
 
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(array('course'=>$exam->getCourse_ID()));
+        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(array('course' => $exam->getCourse_ID()));
         $exam->setQuestions($questions);
 
-        foreach($questions as $question)
-        {
-            $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(array('question'=>$question->getID()));
+        foreach ($questions as $question) {
+            $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(array('question' => $question->getID()));
             $question->setAnswers($answers);
         }
 
         $manager = $this->getDoctrine()->getManager();
-
         $instance = new Examinstance();
         $instance->setUser($this->getUser());
         $instance->setExam($exam);
         $manager->persist($instance);
         $manager->flush();
-
         return $this->render('exams/take.html.twig',
             array('instance' => $instance));
     }
 
-    public function complete($request)
-    {
-        $data = $request->request->all();
 
-        return $this->render('exams/examcompleted.html.twig',
-            array('data' => $data));
-    }
+
+
+        function completeExam(Request $request)
+        {
+
+            $data = $request->getContent();
+            $answerData = json_decode($data, true);
+
+          foreach ($answerData as $result) {
+
+              foreach($result as $key => $value) {
+
+                  $answer = $this->getDoctrine()->getRepository(Answer::class)->findOneBy(array('id' => $value));
+                  $question = $this->getDoctrine()->getRepository(Examquestion::class)->findOneBy(array('id' => $key));
+                  $instance = $this->getDoctrine()->getRepository(Examinstance::class)->findOneby(array('id' => 1));
+
+                  $manager = $this->getDoctrine()->getManager();
+                  $newAnswer = new Answergiven();
+                  $newAnswer->setAnswer($answer);
+                  $newAnswer->setQuestion($question);
+                  $newAnswer->setExamInstance($instance);
+                  $manager->persist($newAnswer);
+                  $manager->flush();
+              }
+          }
+
+
+
+            return $this->render('exams/complete.html.twig',
+                array('data' => $answerData));
+
+        }
+
+
 }
+
 
