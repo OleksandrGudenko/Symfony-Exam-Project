@@ -50,7 +50,6 @@ deleteExam:
     path: /courses/exams/delete/{examId}
     controller: App\Controller\ExamController::deleteExam
 
-#Testing
 takeExam:
     path: /courses/exams/take/{instanceId}
     controller: App\Controller\ExamController::takeExam
@@ -64,7 +63,6 @@ result:
       path: /courses/exams/result/{instanceId}
       controller: App\Controller\ExamController::result
 
-#End Testing
 #End Exams
 
 #Students

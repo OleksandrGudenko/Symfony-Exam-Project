@@ -48,6 +48,18 @@ class Examinstance
      */
     private $user;
 
+    private $answers;
+
+    public function setAnswers($answers)
+    {
+        $this->answers = $answers;
+        return $this;
+    }
+
+    public function answers()
+    {
+        return $this->answers;
+    }
 
     public function setUserID(int $user_id)
     {
