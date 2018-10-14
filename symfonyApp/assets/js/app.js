@@ -29,18 +29,14 @@ window.onload=function() {
 
             }
         }
-        let r =  {};
+        let result =  {};
         for (let j = 0; j < question.length; j++) {
-            r[question[j]] = answer[j];
+            result[question[j]] = answer[j];
         }
 
         let instance = document.getElementById("instanceId").value;
 
-console.log("InstanceBoi", instance);
-console.log("Q&A",question, answer);
-console.log("Result",r);
-
-        axios.post('/complete',{ r })//.then(response => window.location =  '/complete');
+        axios.post('/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
 
     }
 

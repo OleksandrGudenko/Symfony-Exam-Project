@@ -88,36 +88,47 @@ class ExamController extends AbstractController
 
 
 
-        function completeExam(Request $request)
-        {
+    public function completeExam(Request $request)
+    {
+        $data = $request->getContent();
+        $answerData = json_decode($data, true);
 
-            $data = $request->getContent();
-            $answerData = json_decode($data, true);
+        $key='instance';
+        $examInstance = $answerData[$key];
 
-          foreach ($answerData as $result) {
+        foreach ($answerData as $result) {
 
-              foreach($result as $key => $value) {
+            if (is_array($result) || is_object($result)) {
 
-                  $answer = $this->getDoctrine()->getRepository(Answer::class)->findOneBy(array('id' => $value));
-                  $question = $this->getDoctrine()->getRepository(Examquestion::class)->findOneBy(array('id' => $key));
-                  $instance = $this->getDoctrine()->getRepository(Examinstance::class)->findOneby(array('id' => 1));
+                foreach ($result as $question => $answer) {
 
-                  $manager = $this->getDoctrine()->getManager();
-                  $newAnswer = new Answergiven();
-                  $newAnswer->setAnswer($answer);
-                  $newAnswer->setQuestion($question);
-                  $newAnswer->setExamInstance($instance);
-                  $manager->persist($newAnswer);
-                  $manager->flush();
-              }
-          }
-
-
-
-            return $this->render('exams/complete.html.twig',
-                array('data' => $answerData));
+                    $answer = $this->getDoctrine()->getRepository(Answer::class)->findOneBy(array('id' => $answer));
+                    $question = $this->getDoctrine()->getRepository(Examquestion::class)->findOneBy(array('id' => $question));
+                    $newAnswer = new Answergiven();
+                    $newAnswer->setAnswer($answer);
+                    $newAnswer->setQuestion($question);
+                    $instance = $this->getDoctrine()->getRepository(Examinstance::class)->findOneby(array('id' => $examInstance));
+                    $newAnswer->setExamInstance($instance);
+                    $manager = $this->getDoctrine()->getManager();
+                    $manager->persist($newAnswer);
+                    $manager->flush();
+                }
+            }
 
         }
+
+        
+
+        return $this->render('exams/complete.html.twig',
+            array('data' => $answerData));
+
+    }
+
+
+    public function result($instanceId)
+    {
+        return $this->render('exams/result.html.twig');
+    }
 
 
 }
