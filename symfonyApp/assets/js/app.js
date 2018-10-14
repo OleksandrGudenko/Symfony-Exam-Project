@@ -52,7 +52,6 @@ window.onload=function()
     publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
 //End Publish
 
-
 //Submit
     function submitButtonClicked()
     {

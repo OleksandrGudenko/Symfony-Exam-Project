@@ -48,7 +48,7 @@ deleteExam:
 
 #Testing
 takeExam:
-    path: /courses/exams/take/{examId}
+    path: /courses/exams/take/{instanceId}
     controller: App\Controller\ExamController::takeExam
 
 completeExam:
