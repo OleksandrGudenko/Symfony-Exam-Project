@@ -47,13 +47,15 @@ takeExam:
     path: /courses/exams/take/{examId}
     controller: App\Controller\ExamController::takeExam
 
-viewExam:
-    path: /courses/exams/view/{examId}
-
 completeExam:
-  path: /complete
-  controller: App\Controller\ExamController::completeExam
-  #methods: [POST]
+    path: /complete
+    controller: App\Controller\ExamController::completeExam
+    methods: [POST]
+
+result:
+      path: /courses/exams/result/{instanceId}
+      controller: App\Controller\ExamController::result
+
 #End Testing
 #End Exams
 
