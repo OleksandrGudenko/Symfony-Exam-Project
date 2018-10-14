@@ -49,6 +49,17 @@ console.log("Result",r);
 
 };
 
+function deleteButtonClicked(event)
+{
+    console.log(event);
+    const examId = event.target.getAttribute('examId');
+    console.log(examId);
+
+    // send the HTTP REQ
+    axios.delete('/courses/exams/delete/' + examId)
+        .then(response => location.reload());
+}
+
 /*
 axios.post('/complete', { params: {
          'user' : 1, 'question1' : answer1,'question2' : answer2}

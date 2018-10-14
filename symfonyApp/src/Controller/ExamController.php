@@ -51,6 +51,10 @@ class ExamController extends AbstractController
 
     public function deleteExam($examId)
     {
+        $examDelete = $this->getDoctrine()->getRepository(Exam::class)->findOneBy(['id' => $examId]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($examDelete);
+        $entityManager->flush();
         return new Response();
     }
 

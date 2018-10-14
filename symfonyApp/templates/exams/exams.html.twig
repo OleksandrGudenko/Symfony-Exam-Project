@@ -5,6 +5,11 @@
 
 {% block main %}
 <div class="main" align="center">
+
+    {% if user.teacher %}
+    <a href="#" role="button" style="float:left; width:20%; margin-top:1%; margin-left:1%; margin-right:-21%;" class="btn btn-success">Create New Exam</a>
+    {% endif %}
+
     <h3>Exams</h3>
 
     <br>
@@ -16,30 +21,38 @@
             <th scope="col">Creator</th>
             <th scope="col">Course</th>
             <th scope="col">Username</th>
+            {% if user.teacher %}
             <th scope="col">Publish</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            {% else %}
             <th scope="col">Do</th>
             <th scope="col">View Results</th>
+            {% endif %}
         </tr>
 
         </thead>
-    {% for exam in listData %}
+
         <tbody>
+    {% for exam in listData %}
+
         <tr>
             <td scope="row">{{ exam.id }}</td>
             <td>{{ exam.name }} </td>
             <td>{{ exam.creator.username }} </td>
             <td>{{ exam.course.name }} </td>
             <td>{{ user.username }} </td>
-            <td><a href="/courses/exams/publish/{{ exam.id }}" class="btn btn-primary" role="button">Publish</a></td>
-            <td><a href="/courses/exams/edit/{{ exam.id }}" class="btn btn-warning" role="button">Edit</a></td>
-            <td><a href="/courses/exams/delete/{{ exam.id }}" class="btn btn-danger" role="button">Delete</a></td>
-            <td><a href="/courses/exams/take/{{ exam.id }}" class="btn btn-warning" role="button">Do</a></td>
-            <td><a href="/courses/exams/view/{{ exam.id }}" class="btn btn-primary" role="button">View Result</a></td>
+            {% if user.teacher %}
+            <td><a examId="{{ exam.id }}" href="/courses/exams/publish/{{ exam.id }}" class="btn btn-primary" role="button">Publish</a></td>
+            <td><a examId="{{ exam.id }}" href="/courses/exams/edit/{{ exam.id }}" class="btn btn-warning" role="button">Edit</a></td>
+            {% else %}
+            <td><a examId="{{ exam.id }}" href="/courses/exams/take/{{ exam.id }}" class="btn btn-warning" role="button">Do</a></td>
+            <td><a examId="{{ exam.id }}" href="/courses/exams/view/{{ exam.id }}" class="btn btn-primary" role="button">View Result</a></td>
+            {% endif %}
         </tr>
-        </tbody>
+
     {% endfor %}
+
+        </tbody>
     </table>
 </div>
 

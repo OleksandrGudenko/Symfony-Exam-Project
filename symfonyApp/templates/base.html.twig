@@ -17,12 +17,11 @@
                                         <li>
                                             <a href="/courses" role="button">Courses</a>
                                         </li>
-                                        <li>
-                                            <a href="#" role="button">Create New Exam</a>
-                                        </li>
+                                        {% if user.teacher %}
                                         <li>
                                             <a href="/students" role="button">Students</a>
                                         </li>
+                                        {% endif %}
                                         <li>
                                             <a href="/logout" role="button">Logout</a>
                                         </li>
