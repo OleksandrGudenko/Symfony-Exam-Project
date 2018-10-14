@@ -41,7 +41,7 @@ class Examquestion
      */
     private $question;
 
-        public function setQuestionID(int $Questionid)
+    public function setQuestionID(int $Questionid)
     {
         $this->question_id = $Questionid;
         return $this;
