@@ -19,6 +19,10 @@ questions:
     path: /courses/questions/{courseId}
     controller: App\Controller\QuestionController:questions
 
+questionAddNew:
+    path: /courses/question/add
+    controller: App\Controller\QuestionController::questionAddNew
+
 editQuestion:
     path: /courses/questions/edit/{questionId}
     controller: App\Controller\QuestionController::editQuestion

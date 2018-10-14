@@ -1,22 +1,25 @@
 {% extends 'base.html.twig' %}
 
 
-{% block mian %}
+{% block main %}
 
 
-    <div  align="center">
+    <div class="main"  align="center">
+
+        {% if user.teacher %}
+            <a href="#" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
+        {% endif %}
+
         <h3>Questions</h3>
-
-        <div align="left">Hello</div>
 
         <br>
         <table class="table">
             <thead class="thead-dark">
-            <th>ID</th>
-            <th>Course ID</th>
-            <th>Question</th>
-            <th>View Exams</th>'
-            <th>View Questions</th>
+            <th scope="col">ID</th>
+            <th scope="col">Course ID</th>
+            <th scope="col">Question</th>
+            <th scope="col">Edit Question</th>
+            <th scope="col">View Answers</th>
             </thead>
             {% for question in listData %}
                 <tbody>
@@ -24,8 +27,9 @@
                     <td>{{ question.id }}</td>
                     <td>{{ question.course.id }} </td>
                     <td>{{ question.question }}</td>
-                    <td><button class="btn btn-warning">Edit Question</button></td>
-                    <td><button class="btn btn-danger">Delete Questions</button></td>
+                    <td><a href="/courses/questions/edit/{{ question.id }}" class="btn btn-warning" role="button">Edit Question</a></td>
+                    <td><a href="{{ question.id }}" class="btn btn-primary" role="button">View Answers</a></td>
+
                 </tr>
                 </tbody>
             {% endfor %}

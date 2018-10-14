@@ -3,9 +3,6 @@
 {% block main %}
 
     <div class="main" align="center">
-        {% if user.teacher %}
-        <a href="#" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
-        {% endif %}
 
         <h3>Courses</h3>
         <br>
@@ -24,7 +21,7 @@
                     <td scope="row">{{ course.id }}</td>
                     <td>{{ course.name }} </td>
                     <td><a  href="/courses/exams/{{ course.id }}" class="btn btn-primary" role="button">View Exams</a></td>
-                    <td><a class="btn btn-primary" role="button">View Questions</a></td>
+                    <td><a href="/courses/questions/{{ course.id }}" class="btn btn-primary" role="button">View Questions</a></td>
                 </tr>
                 </tbody>
             {% endfor %}

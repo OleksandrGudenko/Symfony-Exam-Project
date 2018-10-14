@@ -29,6 +29,7 @@ class ExamController extends AbstractController
     public function editExam(Request $request, $examId)
     {
         $examData = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $user = $this->getUser();
 
         $form = $this->createFormBuilder($examData)
             //->add('save', SubmitType::class, array('label' => 'Update course'))
@@ -46,6 +47,7 @@ class ExamController extends AbstractController
 
         return $this->render('exams/edit.html.twig',
             array('examData' => $examData,
+                'user' => $user,
                 'editForm' => $form->createView()));
     }
 
@@ -61,10 +63,11 @@ class ExamController extends AbstractController
     public function publishExam($examId)
     {
         $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
+        $user = $this->getUser();
 
         return $this->render('exams/students.html.twig',
-            array('students' => $students)
-        );
+            array('students' => $students,
+                'user' => $user));
     }
 
     public function takeExam($examId)
@@ -79,6 +82,7 @@ class ExamController extends AbstractController
             $question->setAnswers($answers);
         }
 
+        $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
         $instance = new Examinstance();
         $instance->setUser($this->getUser());
@@ -86,7 +90,8 @@ class ExamController extends AbstractController
         $manager->persist($instance);
         $manager->flush();
         return $this->render('exams/take.html.twig',
-            array('instance' => $instance));
+            array('instance' => $instance,
+                'user' => $user));
     }
 
 

@@ -14,16 +14,16 @@
                 <th scope="col">Publish</th>
             </tr>
             </thead>
+            <tbody>
             {% for student in students %}
-                <tbody>
                 <tr>
                     <td scope="row">{{ student.id }}</td>
                     <td>{{ student.firstname }} </td>
                     <td>{{ student.lastname }}</td>
                     <td><button data-id="{{ student.id }}" class="checkButton">Publish</button></td>
                 </tr>
-                </tbody>
             {% endfor %}
+            </tbody>
         </table>
     </div>
 

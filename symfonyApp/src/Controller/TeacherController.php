@@ -19,8 +19,10 @@ class TeacherController extends AbstractController
     public function users(Request $request)
     {
         $listData = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $user = $this->getUser();
 
         return $this->render('users/list.html.twig',
-            array('listData' => $listData ));
+            array('listData' => $listData,
+                'user' =>         $user));
     }
 }
