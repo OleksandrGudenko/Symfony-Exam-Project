@@ -12,9 +12,11 @@ class CourseController extends AbstractController
     public function courses(Request $request)
     {
         $listData = $this->getDoctrine()->getRepository(Course::class)->findAll();
+        $user = $this->getUser();
 
         return $this->render('courses/courses.html.twig',
-            array('listData' => $listData ));
+            array('listData' => $listData,
+                'user' => $user));
     }
 
     public function editCourse(Request $request, $courseId)

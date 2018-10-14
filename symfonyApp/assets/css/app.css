@@ -95,7 +95,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: black;
 }
 
 #sidebar ul.components {
@@ -103,7 +103,7 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul p {
-    color: #fff;
+    color: black;
     padding: 10px;
 }
 
@@ -111,18 +111,14 @@ a, a:hover, a:focus {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: black;
+    text-decoration:none;
 }
 #sidebar ul li a:hover {
     color: white;
-    background: lightskyblue;
+    background: darkorange;
+    text-decoration:none;
 }
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
-}
-
-
 
 p {
     font-family: 'Roboto', sans-serif;

@@ -10,7 +10,7 @@ require('../css/app.css');
 require('../images/todo.ico');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+//var $ = require('jquery');
 
 import axios from 'axios';
 
@@ -51,5 +51,33 @@ window.onload=function()
     let publishButtons = document.querySelectorAll('.publishButton');
     publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
 //End Publish
+
+
+//Submit
+    function submitButtonClicked()
+    {
+        let question = [];
+        let answer = [];
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; ++i) {
+            if (inputs[i].checked) {
+                question.push(inputs[i].id);
+                answer.push(inputs[i].value);
+
+            }
+        }
+        let result =  {};
+        for (let j = 0; j < question.length; j++) {
+            result[question[j]] = answer[j];
+        }
+
+        let instance = document.getElementById("instanceId").value;
+
+        axios.post('/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
+
+    }
+
+    document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
+//End Submit
 }
 
