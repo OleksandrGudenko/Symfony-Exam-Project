@@ -53,7 +53,7 @@ viewExam:
 completeExam:
   path: /complete
   controller: App\Controller\ExamController::completeExam
-  methods: [POST]
+  #methods: [POST]
 #End Testing
 #End Exams
 

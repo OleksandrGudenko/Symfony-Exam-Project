@@ -3,21 +3,24 @@
 
 {% block main %}
   <h3>{{ instance.exam.name }}</h3>
+    <input hidden disabled id="instanceId" value={{ instance.id }}> </input>
 
-        <form action="#" method="post">
+
         {% for question in instance.exam.questions %}
             <p>{{ question.question }}</p>
+
                 {% for answer in question.answers %}
 
                         <div class="radio">
-                            <label><input type="radio" name="question{{ answer.question.id}}" value="answer{{ answer.id }}">{{ answer.answer }}</label>
+                            <label><input type="radio" name="{{ answer.question.id}}" id="{{ answer.question.id}}" value="{{ answer.id }}">{{ answer.answer }}</label>
                         </div>
 
                 {% endfor %}
+
             <br><br>
         {% endfor %}
-            <input type="submit" class="btn btn-primary ">
-        </form>
+            <input type="submit" id="submitButton" class="btn btn-primary ">
+
     </div>
 
 

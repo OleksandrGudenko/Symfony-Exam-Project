@@ -19,51 +19,28 @@ window.onload=function() {
 
     function submitButtonClicked() {
 
-        let question1 = document.getElementsByName('1'),
-            answer1 = '', i = 0;
+        let question = [];
+        let answer = [];
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; ++i) {
+            if (inputs[i].checked) {
+                question.push(inputs[i].id);
+                answer.push(inputs[i].value);
 
-        for( ; i < question1.length; i++ )
-        {
-            if( question1[i].checked ) {
-                answer1 = question1[i].value;
-                break;
             }
         }
-
-        let question2 = document.getElementsByName('2'),
-            answer2 = '', j = 0;
-
-        for( ; j < question2.length; j++ )
-        {
-            if( question2[j].checked ) {
-                answer2 = question2[j].value;
-                break;
-            }
-
+        let r =  {};
+        for (let j = 0; j < question.length; j++) {
+            r[question[j]] = answer[j];
         }
 
-        let question3 = document.getElementsByName('3'),
-            answer3 = '', k = 0;
+        let instance = document.getElementById("instanceId").value;
 
-        for( ; k < question3.length; k++ )
-        {
-            if( question3[k].checked ) {
-                answer3 = question2[k].value;
-                break;
-            }
+console.log("InstanceBoi", instance);
+console.log("Q&A",question, answer);
+console.log("Result",r);
 
-        }
-
-
-        axios({
-            method: 'post',
-            url: '/complete',
-            data: {
-                q1: answer1,
-                q2: answer2,
-                q3: answer3
-            }
-        }).then(response => window.location.href = '/complete');
+        axios.post('/complete',{ r })//.then(response => window.location =  '/complete');
 
     }
 

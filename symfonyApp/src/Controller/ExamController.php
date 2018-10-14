@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Exam;
-use App\Enity\Examquestion;
+use App\Entity\Examquestion;
 use App\Entity\Answergiven;
 use App\Entity\Examinstance;
 use App\Entity\Question;
@@ -80,33 +80,38 @@ class ExamController extends AbstractController
 
 
 
-    
+
         function completeExam(Request $request)
         {
 
             $data = $request->getContent();
             $answerData = json_decode($data, true);
 
-            foreach ($answerData as $key => $value) {
-                if (isset($value)) {
-                    $data = $request->request->all();
-                    $answer = $this->getDoctrine()->getRepository(Answer::class)->findOneBy(array('id' => $value));
-                    $question = $this->getDoctrine()->getRepository(Examquestion::class)->findOneBy(array('id' => $key));
-                    $instance = $this->getDoctrine()->getRepository(Examinstance::class)->findOneby(array('id' => 1));
+          foreach ($answerData as $result) {
 
-                    $manager = $this->getDoctrine()->getManager();
-                    $newAnswer = new Answergiven();
-                    $newAnswer->setAnswer($answer);
-                    $newAnswer->setQuestion($question);
-                    $newAnswer->setExamInstance($instance);
-                    $manager->persist($newAnswer);
-                    $manager->flush();
-                }
-            }
-            return $this->render('exams/examcompleted.html.twig',
-                array('data' => $data));
+              foreach($result as $key => $value) {
+
+                  $answer = $this->getDoctrine()->getRepository(Answer::class)->findOneBy(array('id' => $value));
+                  $question = $this->getDoctrine()->getRepository(Examquestion::class)->findOneBy(array('id' => $key));
+                  $instance = $this->getDoctrine()->getRepository(Examinstance::class)->findOneby(array('id' => 1));
+
+                  $manager = $this->getDoctrine()->getManager();
+                  $newAnswer = new Answergiven();
+                  $newAnswer->setAnswer($answer);
+                  $newAnswer->setQuestion($question);
+                  $newAnswer->setExamInstance($instance);
+                  $manager->persist($newAnswer);
+                  $manager->flush();
+              }
+          }
+
+
+
+            return $this->render('exams/complete.html.twig',
+                array('data' => $answerData));
 
         }
+
 
 }
 
