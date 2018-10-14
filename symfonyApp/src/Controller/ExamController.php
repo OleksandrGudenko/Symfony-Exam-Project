@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Answer;
 use App\Entity\Exam;
 use App\Entity\Examinstance;
+use App\Entity\Examquestion;
 use App\Entity\Question;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,35 +57,47 @@ class ExamController extends AbstractController
         return new Response();
     }
 
-    public function publishExam($examId)
+    public function students($examId)
     {
         $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
 
         return $this->render('exams/students.html.twig',
-            array('students' => $students)
+            array(  'students'  => $students,
+                    'exam'      => $examId)
         );
     }
 
-    public function takeExam($examId)
+    public function publishExam($examId, $studentId)
     {
         $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
 
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(array('course'=>$exam->getCourse_ID()));
-        $exam->setQuestions($questions);
+        $examQuestions = $this->getDoctrine()->getRepository(Examquestion::class)->findBy(array('exam'=>$exam->getId()));
+        $exam->setQuestions($examQuestions);
 
-        foreach($questions as $question)
+        foreach($examQuestions as $examQuestion)
         {
-            $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(array('question'=>$question->getID()));
+            $question = $this->getDoctrine()->getRepository(Question::class)->find($examQuestion->getQuestion());
+
+            $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(array('question'=>$question->getId()));
             $question->setAnswers($answers);
         }
 
         $manager = $this->getDoctrine()->getManager();
 
+        $student = $this->getDoctrine()->getRepository(User::class)->find($studentId);
+
         $instance = new Examinstance();
-        $instance->setUser($this->getUser());
+        $instance->setUser($student);
         $instance->setExam($exam);
         $manager->persist($instance);
         $manager->flush();
+
+        return new Response();
+    }
+
+    public function takeExam($instanceId)
+    {
+        $instance = $this->getDoctrine()->getRepository(Examinstance::class)->find($instanceId);
 
         return $this->render('exams/take.html.twig',
             array('instance' => $instance));

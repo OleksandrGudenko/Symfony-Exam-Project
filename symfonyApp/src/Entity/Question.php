@@ -78,7 +78,4 @@ class Question
     {
         return $this->id;
     }
-
-
-
 }
