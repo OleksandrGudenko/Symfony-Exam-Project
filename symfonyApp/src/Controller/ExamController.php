@@ -8,6 +8,7 @@ use App\Entity\Examquestion;
 use App\Entity\Answergiven;
 use App\Entity\Examinstance;
 use App\Entity\Question;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,14 +18,11 @@ class ExamController extends AbstractController
     public function exams($courseId)
     {
         $listData = $this->getDoctrine()->getRepository(Exam::class)->findBy(['course' => $courseId]);
-
         $user = $this->getUser();
-        $id = $user->getId();
-        $listData = $this->getDoctrine()->getRepository(Exam::class)->findBy(array('course'=>$courseId, 'creator'=>$id));
+        //$listData = $this->getDoctrine()->getRepository(Exam::class)->findBy(array('course'=>$courseId, 'creator'=>$user->getId()));
 
         return $this->render('exams/exams.html.twig',
             array('listData' => $listData,
-                'id' => $id,
                 'user' => $user));
     }
 
@@ -54,6 +52,15 @@ class ExamController extends AbstractController
     public function deleteExam($examId)
     {
         return new Response();
+    }
+
+    public function publishExam($examId)
+    {
+        $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
+
+        return $this->render('exams/students.html.twig',
+            array('students' => $students)
+        );
     }
 
     public function takeExam($examId)

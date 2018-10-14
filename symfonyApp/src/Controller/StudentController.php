@@ -10,9 +10,9 @@ class StudentController extends AbstractController
 {
     public function students(Request $request)
     {
-        $listData = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
 
         return $this->render('students/students.html.twig',
-            array('students' => $listData ));
+            array('students' => $students ));
     }
 }
