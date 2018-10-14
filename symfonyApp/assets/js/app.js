@@ -14,11 +14,47 @@ require('../images/todo.ico');
 
 import axios from 'axios';
 
+window.onload=function()
+{
+    //Delete
+    function deleteButtonClicked(event)
+    {
+        const itemId = event.target.getAttribute('data-id');
 
-window.onload=function() {
+        // send the HTTP REQ
+        axios.delete('/todoList/deleteItem/' + itemId)
+            .then(response => window.location.href = window.location.href);
+    }
+    let deleteButtons = document.querySelectorAll('.deleteButton');
+    deleteButtons.forEach(button => button.addEventListener('click', deleteButtonClicked));
+//End Delete
 
-    function submitButtonClicked() {
+//Complete
+    function completeButtonClicked(event)
+    {
+        const itemId = event.target.getAttribute('data-id');
+        axios.post('/todoList/item/' + itemId + '/toggleIsDone')
+            .then(response => window.location.href = window.location.href);
+    }
+    let isDoneButtons = document.querySelectorAll('.completeButton');
+    isDoneButtons.forEach(button => button.addEventListener('click', completeButtonClicked));
+//End Complete
 
+//Publish
+    function publishButtonClicked(event)
+    {
+        const studentId = event.target.getAttribute('student-id');
+        const examId = event.target.getAttribute('exam-id');
+        axios.post('/courses/exams/students/publish/' + examId + '/' + studentId)
+            .then(response => location.reload());
+    }
+    let publishButtons = document.querySelectorAll('.publishButton');
+    publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
+//End Publish
+
+//Submit
+    function submitButtonClicked()
+    {
         let question = [];
         let answer = [];
         let inputs = document.getElementsByTagName("input");
@@ -40,26 +76,7 @@ window.onload=function() {
 
     }
 
-
     document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
-
-};
-
-function deleteButtonClicked(event)
-{
-    console.log(event);
-    const examId = event.target.getAttribute('examId');
-    console.log(examId);
-
-    // send the HTTP REQ
-    axios.delete('/courses/exams/delete/' + examId)
-        .then(response => location.reload());
+//End Submit
 }
 
-/*
-axios.post('/complete', { params: {
-         'user' : 1, 'question1' : answer1,'question2' : answer2}
-            })
-            .then(response => window.location.href = window.location.href);
-
-*/

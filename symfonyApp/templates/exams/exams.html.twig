@@ -33,20 +33,31 @@
         </thead>
 
         <tbody>
-    {% for exam in listData %}
+    {% for instance in listData %}
 
         <tr>
-            <td scope="row">{{ exam.id }}</td>
-            <td>{{ exam.name }} </td>
-            <td>{{ exam.creator.username }} </td>
-            <td>{{ exam.course.name }} </td>
-            <td>{{ user.username }} </td>
             {% if user.teacher %}
-            <td><a examId="{{ exam.id }}" href="/courses/exams/publish/{{ exam.id }}" class="btn btn-primary" role="button">Publish</a></td>
-            <td><a examId="{{ exam.id }}" href="/courses/exams/edit/{{ exam.id }}" class="btn btn-warning" role="button">Edit</a></td>
+
+            <td scope="row">{{ instance.id }}</td>
+            <td>{{ instance.name }} </td>
+            <td>{{ instance.creator.username }} </td>
+            <td>{{ instance.course.name }} </td>
+            <td>{{ user.username }} </td>
+
+            <td><a examId="{{ instance.id }}" href="/courses/exams/students/{{ instance.id }}" class="btn btn-primary" role="button">Publish</a></td>
+            <td><a examId="{{ instance.id }}" href="/courses/exams/edit/{{ instance.id }}" class="btn btn-warning" role="button">Edit</a></td>
+
             {% else %}
-            <td><a examId="{{ exam.id }}" href="/courses/exams/take/{{ exam.id }}" class="btn btn-warning" role="button">Do</a></td>
-            <td><a examId="{{ exam.id }}" href="/courses/exams/view/{{ exam.id }}" class="btn btn-primary" role="button">View Result</a></td>
+
+            <td scope="row">{{ instance.id }}</td>
+            <td>{{ instance.exam.name }} </td>
+            <td>{{ instance.exam.creator.username }} </td>
+            <td>{{ instance.exam.course.name }} </td>
+            <td>{{ user.username }} </td>
+
+            <td><a examId="{{ instance.id }}" href="/courses/exams/take/{{ instance.id }}" class="btn btn-warning" role="button">Do</a></td>
+            <td><a examId="{{ instance.id }}" href="/courses/exams/view/{{ instance.id }}" class="btn btn-primary" role="button">View Result</a></td>
+
             {% endif %}
         </tr>
 
