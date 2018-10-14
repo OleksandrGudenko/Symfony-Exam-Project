@@ -4,7 +4,9 @@
 {% block main %}
 
     Edit exam {{ examData.name }}
+    <br>
 
-    
-
+    <input type="text" value="{{ examData.name }}">
+    <button type="submit" class="btn btn-warning">Confirm</button>
+    <a href="/courses/">Cancel</a>
 {% endblock %}
