@@ -111,7 +111,7 @@ takeExam:
     controller: App\Controller\ExamController::takeExam
 
 completeExam:
-    path: /courses/exams/complete
+    path: /complete
     controller: App\Controller\ExamController::completeExam
     methods: [POST]
 

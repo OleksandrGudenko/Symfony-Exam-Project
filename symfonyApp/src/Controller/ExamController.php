@@ -96,13 +96,29 @@ class ExamController extends AbstractController
 
     public function publishAll(Request $request)
     {
-        $user = $this->getUser();
         $data = $request->getContent();
         $publishData = json_decode($data, true);
 
+        $examKey='examId';
+        $examId = $publishData[$examKey];
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+
+        $studentKey='studentIds';
+        $students = $publishData[$studentKey];
+
+        foreach($students as $studentId){
+
+        $student = $this->getDoctrine()->getRepository(User::class)->find($studentId);
+        $instance = new Examinstance();
+        $instance->setUser($student);
+        $instance->setExam($exam);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($instance);
+        $manager->flush();
+
+        }
 
         return new Response();
-
 
     }
 
@@ -110,14 +126,6 @@ class ExamController extends AbstractController
     {
         $student = $this->getDoctrine()->getRepository(User::class)->find($studentId);
         $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
-
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(array('course' => $exam->getCourse_ID()));
-        $exam->setQuestions($questions);
-
-        foreach ($questions as $question) {
-            $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(array('question' => $question->getID()));
-            $question->setAnswers($answers);
-        }
 
         $instance = new Examinstance();
         $instance->setUser($student);
@@ -208,8 +216,8 @@ class ExamController extends AbstractController
         $data = $request->getContent();
         $answerData = json_decode($data, true);
 
-        $key='instance';
-        $examInstance = $answerData[$key];
+        $instanceKey='instance';
+        $examInstance = $answerData[$instanceKey];
 
         $manager = $this->getDoctrine()->getManager();
 
