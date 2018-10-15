@@ -16,11 +16,6 @@
             </tr>
             </thead>
             <tbody>
-
-            {% for student in students %}
-            {% if student.instances|length == 0 %}
-                <td>do your thing</td>
-
             {% for instance in instances %}
                 {% if instance.grade %}
                 <tr>

@@ -27,7 +27,7 @@
                     <td>{{ question.course.id }} </td>
                     <td>{{ question.question }}</td>
                     <td><a href="/courses/questions/edit/{{ question.id }}/view" class="btn btn-warning" role="button">Edit Question</a></td>
-                    <td><a href="{{ question.id }}" class="btn btn-primary" role="button">View Answers</a></td>
+                    <td><a href="/courses/questions/answers/{{ question.id }}" class="btn btn-primary" role="button">View Answers</a></td>
 
                 </tr>
                 </tbody>
