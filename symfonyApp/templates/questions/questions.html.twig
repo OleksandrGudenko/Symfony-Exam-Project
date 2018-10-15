@@ -5,11 +5,10 @@
 
 
     <div class="main"  align="center">
-        {% for question in listData %}
+
         {% if user.teacher %}
-            <a href="/courses/question/add/{{ question.course.id }}" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
+            <a href="/courses/question/add/{{ courseId }}" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
         {% endif %}
-        {% endfor %}
         <h3>Questions</h3>
 
         <br>

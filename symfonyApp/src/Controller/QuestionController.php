@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Entity\Course;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,35 +19,24 @@ class QuestionController extends AbstractController
 
         return $this->render('questions/questions.html.twig',
             array('listData' => $listData,
+                'courseId' => $courseId,
                 'user' => $user));
     }
 
-    public function addQuestion(){
-        $user = $this->getUser();
+    public function addQuestion($courseId){
+        $course = $this->getDoctrine()->getRepository(Course::class)->findOneBy(['id' => $courseId]);
+
 
         $newQuestion = new Question();
-        $newForm = $this->createForm(NewQuestion::class, $newQuestion, array('action' => $this->generateUrl('questionAddNew')));
-        $newForm->add('save', SubmitType::class);
+        $newQuestion->setCourse($course);
+        $newQuestion->setQuestion('');
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($newQuestion);
+        $manager->flush();
 
-
-        return $this->render('questions/edit.html.twig',
-            array('user' => $user,
-                'newQuestionForm' =>  $newForm->createView()));
-    }
-
-    public function questionAddNew(Request $request)
-    {
-        $newQuestion = new Question();
-        $newForm = $this->createForm(NewQuestion::class, $newQuestion);
-
-        $newForm->handleRequest($request);
-        if ($newForm->isSubmitted()) {
-            $newQuestion = $newForm->getData();
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newQuestion);
-            $entityManager->flush();
-            return $this->redirectToRoute('courses');
-        }
+        $questionId = $this->getDoctrine()->getRepository(Question::class)->findOneBy(['course' => $courseId], ['id' => 'DESC']);
+        $questionId = $questionId->getId();
+        return $this->redirectToRoute('viewQuestion', ['questionId' => $questionId]);
     }
 
     public function updateQuestion($questionId){
