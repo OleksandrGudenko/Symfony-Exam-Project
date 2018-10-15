@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    {{ parent() }}
+
+    <div>
+        Successfully updated question!
+    </div>
+    <div>
+        <a href="/courses/questions/{{ question.course.id }}" class="btn btn-primary" role="button">Go </a>
+    </div>
+{% endblock %}

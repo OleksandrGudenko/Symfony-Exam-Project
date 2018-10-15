@@ -5,11 +5,11 @@
 
 
     <div class="main"  align="center">
-
+        {% for question in listData %}
         {% if user.teacher %}
-            <a href="#" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
+            <a href="/courses/question/add/{{ question.course.id }}" role="button" style="float:left; width:22%; margin-top:1%; margin-left:1%; margin-right:-26%;" class="btn btn-success">Add New Question</a>
         {% endif %}
-
+        {% endfor %}
         <h3>Questions</h3>
 
         <br>
@@ -27,7 +27,7 @@
                     <td>{{ question.id }}</td>
                     <td>{{ question.course.id }} </td>
                     <td>{{ question.question }}</td>
-                    <td><a href="/courses/questions/edit/{{ question.id }}" class="btn btn-warning" role="button">Edit Question</a></td>
+                    <td><a href="/courses/questions/edit/{{ question.id }}/view" class="btn btn-warning" role="button">Edit Question</a></td>
                     <td><a href="{{ question.id }}" class="btn btn-primary" role="button">View Answers</a></td>
 
                 </tr>

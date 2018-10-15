@@ -19,13 +19,30 @@ questions:
     path: /courses/questions/{courseId}
     controller: App\Controller\QuestionController:questions
 
+newQuestionForm:
+    path: /courses/question/new
+    controller: App\Controller\QuestionController:viewQuestion
+
+
+addQuestion:
+    path: /courses/question/add/{courseId}
+    controller: App\Controller\QuestionController::addQuestion
+
+updateQuestion:
+    path: /courses/questions/edit/{questionId}/success
+    controller: App\Controller\QuestionController::updateQuestion
+    requirements:
+        id: '\d+'
+
 questionAddNew:
-    path: /courses/question/add
+    path: /courses/questions/add/addNew
     controller: App\Controller\QuestionController::questionAddNew
 
-editQuestion:
-    path: /courses/questions/edit/{questionId}
-    controller: App\Controller\QuestionController::editQuestion
+viewQuestion:
+    path: /courses/questions/edit/{questionId}/view
+    controller: App\Controller\QuestionController::viewQuestion
+    requirements:
+        id: '\d+'
 
 #End Questions
 

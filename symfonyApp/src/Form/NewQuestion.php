@@ -12,6 +12,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         ->setAction($options['action'])
-        ->add('question', TextType::class);
+        ->add('question', TextType::class)
+        ->add('course', TextType::class);
 }
 }
