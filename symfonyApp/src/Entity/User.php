@@ -59,6 +59,19 @@ class User implements UserInterface
      */
     private $teacher;
 
+    private $instances;
+
+    public function instances()
+    {
+        return $this->instances;
+    }
+
+    public function setInstances($instances)
+    {
+        $this->instances = $instances;
+        return $this;
+    }
+
     public function setUsername(string $username): self
     {
         $this->username = $username;

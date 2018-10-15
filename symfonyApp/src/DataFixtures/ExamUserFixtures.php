@@ -108,12 +108,6 @@ class ExamUserFixtures extends Fixture
         $phpExam2->setExamName('1st Exam for Finnish');
         $manager->persist($phpExam2);
 
-        $phpExamInstance1 = new Examinstance();
-        $phpExamInstance1->setUser($studentUser);
-        $phpExamInstance1->setExam($phpExam1);
-        $phpExamInstance1->setGrade('0');
-        $manager->persist($phpExamInstance1);
-
         $phpExamQuestion1 = new Examquestion();
         $phpExamQuestion1->setQuestion($phpQuestion1);
         $phpExamQuestion1->setExam($phpExam1);
