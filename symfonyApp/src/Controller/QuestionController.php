@@ -7,7 +7,6 @@ use App\Entity\Course;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Form\NewQuestion;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class QuestionController extends AbstractController

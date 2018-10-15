@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    {{ parent() }}
+
+    <div>
+        Successfully updated answer!
+    </div>
+    <div>
+        <a href="/courses/questions/answers/add/{{ answer.question.id }}" class="btn btn-success" role="button">Create Another Answer</a>
+        <a href="/courses/questions/answers/{{ answer.question.id }}" class="btn btn-primary" role="button">Go Back Answer</a>
+    </div>
+{% endblock %}
