@@ -25,8 +25,7 @@
             <th scope="col">Publish</th>
             <th scope="col">Edit</th>
             {% else %}
-            <th scope="col">Do</th>
-            <th scope="col">View Results</th>
+            <th scope="col"> </th>
             {% endif %}
         </tr>
 
@@ -54,10 +53,11 @@
             <td>{{ instance.exam.creator.username }} </td>
             <td>{{ instance.exam.course.name }} </td>
             <td>{{ user.username }} </td>
-
-            <td><a examId="{{ instance.id }}" href="/courses/exams/take/{{ instance.id }}" class="btn btn-warning" role="button">Do</a></td>
+            {% if instance.grade  %}
             <td><a examId="{{ instance.id }}" href="/courses/exams/result/{{ instance.id }}" class="btn btn-primary" role="button">View Result</a></td>
-
+            {% else %}
+            <td><a examId="{{ instance.id }}" href="/courses/exams/take/{{ instance.id }}" class="btn btn-warning" role="button">Take Exam</a></td>
+            {% endif %}
             {% endif %}
         </tr>
 

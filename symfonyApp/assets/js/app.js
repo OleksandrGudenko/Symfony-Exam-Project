@@ -14,8 +14,19 @@ require('../images/todo.ico');
 
 import axios from 'axios';
 
+
+//Break Browser Navigation
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+    history.go(1);
+};
+
+
 window.onload=function()
 {
+
+
+
     //Delete
     function deleteButtonClicked(event)
     {

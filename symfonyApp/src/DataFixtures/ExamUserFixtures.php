@@ -124,12 +124,6 @@ class ExamUserFixtures extends Fixture
         $phpExamQuestion2->setExam($phpExam1);
         $manager->persist($phpExamQuestion2);
 
-        $phpAnswerGiven1 = new Answergiven();
-        $phpAnswerGiven1->setAnswer($phpAnswer3);
-        $phpAnswerGiven1->setQuestion($phpExamQuestion1);
-        $phpAnswerGiven1->setExamInstance($phpExamInstance1);
-        $manager->persist($phpAnswerGiven1);
-
         $manager->flush();
     }
 
