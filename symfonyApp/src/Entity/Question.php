@@ -40,6 +40,19 @@ class Question
 
     private $answers;
 
+    private $correctAnswer;
+
+    public function correctAnswer()
+    {
+        return $this->correctAnswer;
+    }
+
+    public function setCorrectAnswer($correctAnswer)
+    {
+        $this->correctAnswer = $correctAnswer;
+        return $this;
+    }
+
     public function setAnswers($answers)
     {
         $this->answers = $answers;

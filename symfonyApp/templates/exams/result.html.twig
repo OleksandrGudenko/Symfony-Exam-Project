@@ -6,32 +6,46 @@
 
 <div class="main" align="center">
 
-
     <h3>Result</h3>
 
     <table class="table table-hover table-sm" width="100%">
 
         <thead class="thead-dark">
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Exam ID </th>
-            <th scope="col">User ID </th>
+            <th scope="col">Exam</th>
             <th scope="col">Grade</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>{{ instance.id }}</td>
-            <td> {{ instance.exam.id }}</td>
-            <td> {{ instance.user.id }}</td>
-            <td>{{ instance.grade }}</td>
-
+            <td>{{ instance.exam.name }}</td>
+            <td>{{ instance.grade }}%</td>
         </tr>
         </tbody>
 
+    </table>
 
-</table>
+    <h3>Answers</h3>
 
+    <table class="table table-hover table-sm" width="100%">
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Correct Answer</th>
+            <th scope="col">Your Answer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for answer in instance.answers %}
+        <tr>
+            <td>{{ answer.question.question.question }}</td>
+            <td>{{ answer.question.question.correctAnswer.answer }}</td>
+            <td>{{ answer.answer.answer }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 {% endblock %}
