@@ -8,7 +8,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Answergiven;
 use App\Entity\Exam;
 use App\Entity\Examinstance;
 use App\Entity\Examquestion;
