@@ -55,6 +55,22 @@ class AnswerController extends AbstractController
     public function viewAnswer(Request $request, $answerId)
     {
         $answer = $this->getDoctrine()->getManager()->getRepository(Answer::class)->find($answerId);
+
+        $question = $answer->getQuestion();
+      //  $questionId = $question->getId();
+        $questionAnswers = $this->getDoctrine()->getManager()->getRepository(Answer::class)->findBy(['question' =>$question]);
+
+        $correctAnswer = null;
+
+        foreach($questionAnswers as $questionAnswer)
+        {
+            if($questionAnswer->getCorrectAnswer() == 1)
+            {
+                $correctAnswer = $questionAnswer;
+                break;
+            }
+        }
+
         $user = $this->getUser();
         $form = $this->createFormBuilder($answer)
             ->add('answer', TextType::class)
@@ -69,27 +85,34 @@ class AnswerController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             if($form->get('save')->isClicked())
             {
-                // $form->getData() holds the submitted values
-                // but, the original `$task` variable has also been updated
-                $answer = $form->getData();
-                // ... perform some action, such as saving the task to the database
-                // for example, if Task is a Doctrine entity, save it!
-                $entityManager->persist($answer);
-                $entityManager->flush();
-                return $this->redirectToRoute('updateAnswer', ['answerId' => $answerId]);
-            }
-            /*else {
-                $answer = $form->getData();
-                $answer->setCorrectAnswer(false);
-                $entityManager->persist($answer);
-                $entityManager->flush();
-                return $this->render('answers/correctAnswerExist.html.twig', [
-                    'answer' => $answer,
-                    'answerId' => $answerId,
-                    'user' => $user
-                ]);
-            }*/
+                $formAnswer = $form->getData();
+                $formAnswer->getCorrectAnswer();
 
+                if($correctAnswer == null || $formAnswer->getCorrectAnswer() == 0 ){
+
+                    $answer = $form->getData();
+
+                    $entityManager->persist($answer);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('updateAnswer', ['answerId' => $answerId]);
+                }
+                else {
+
+                    //if you edit to yes
+
+                    //if you edit to no
+
+                    $answer = $form->getData();
+                    $answer->setCorrectAnswer(false);
+                    $entityManager->persist($answer);
+                    $entityManager->flush();
+                    return $this->render('answers/correctAnswerExist.html.twig', [
+                        'answer' => $answer,
+                        'answerId' => $answerId,
+                        'user' => $user
+                    ]);
+                }
+            }
         }
 
         return $this->render('answers/viewAnswer.html.twig', [

@@ -9,7 +9,6 @@
         <table class="table table-hover table-sm">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">View Exams</th>
                 {% if user.teacher %}
@@ -20,7 +19,6 @@
             {% for course in listData %}
                 <tbody>
                 <tr>
-                    <td scope="row">{{ course.id }}</td>
                     <td>{{ course.name }} </td>
                     <td><a  href="/courses/exams/{{ course.id }}" class="btn btn-primary" role="button">View Exams</a></td>
                     {% if user.teacher %}
