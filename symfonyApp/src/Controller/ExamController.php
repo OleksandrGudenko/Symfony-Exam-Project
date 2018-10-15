@@ -9,9 +9,12 @@ use App\Entity\Answergiven;
 use App\Entity\Examinstance;
 use App\Entity\Question;
 use App\Entity\User;
+use App\Entity\Course;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ExamController extends AbstractController
 {
@@ -33,41 +36,85 @@ class ExamController extends AbstractController
 
         return $this->render('exams/exams.html.twig',
             array(  'listData'  => $listData,
-                    'user'      => $user));
+                    'user'      => $user,
+                    'courseId' => $courseId
+            ));
+    }
+
+    public function createExam($courseId){
+
+        $course = $this->getDoctrine()->getRepository(Course::class)->findOneBy(['id' => $courseId]);
+        $user = $this->getUser();
+
+        $newExam = new Exam();
+        $newExam->setCourse($course);
+        $newExam->setCreator($user);
+        $newExam->setExamName('');
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($newExam);
+        $manager->flush();
+
+        $examId = $this->getDoctrine()->getRepository(Exam::class)->findOneBy(['course' => $courseId], ['id' => 'DESC']);
+        $examId = $examId->getId();
+
+        return $this->redirectToRoute('editExam', ['examId' => $examId]);
+
     }
 
     public function editExam(Request $request, $examId)
     {
-        $examData = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $exam = $this->getDoctrine()->getManager()->getRepository(Exam::class)->find($examId);
         $user = $this->getUser();
-
-        $form = $this->createFormBuilder($examData)
-            //->add('save', SubmitType::class, array('label' => 'Update course'))
+        $form = $this->createFormBuilder($exam)
+            ->add('name', TextType::class, array('label' => 'Exam Name'))
+            ->add('save', SubmitType::class, array('label' => 'Save Changes'))
             ->getForm();
-
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
-            $examData = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($examData);
-            $entityManager->flush();
-        }
+            if($form->get('save')->isClicked())
+            {
+                $exam = $form->getData();
+                $entityManager->persist($exam);
+                $entityManager->flush();
+                return $this->redirectToRoute('updateExam', ['examId' => $examId]);
+            }
 
-        return $this->render('exams/edit.html.twig',
-            array('examData' => $examData,
-                'user' => $user,
-                'editForm' => $form->createView()));
+        }
+        return $this->render('exams/edit.html.twig', [
+            'examId' => $examId,
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
     }
 
-    public function deleteExam($examId)
+    public function updateExam($examId){
+        $exam = $this->getDoctrine()->getManager()->getRepository(Exam::class)->find($examId);
+        $user = $this->getUser();
+        $courseId = $exam->getCourse()->getId();
+
+        return $this->render('exams/updateExam.html.twig',
+            ['exam' => $exam,
+             'user'=> $user,
+             'courseId' => $courseId]);
+    }
+
+    public function questionsExam($examId)
     {
-        $examDelete = $this->getDoctrine()->getRepository(Exam::class)->findOneBy(['id' => $examId]);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($examDelete);
-        $entityManager->flush();
-        return new Response();
+        $exam = $this->getDoctrine()->getManager()->getRepository(Exam::class)->find($examId);
+
+        $questions = $this->getDoctrine()->getManager()->getRepository(Question::class)->findBy(['course' => $exam->getCourse()]);
+
+        $examQuestions = $this->getDoctrine()->getRepository(Examquestion::class)->findBy(array('exam' => $exam));
+        $exam->setQuestions($examQuestions);
+
+        $user = $this->getUser();
+
+        return $this->render('exams/questions.html.twig',
+            ['user'=> $user,
+             'questions' => $questions,
+             'exam' => $exam   ]);
     }
 
 

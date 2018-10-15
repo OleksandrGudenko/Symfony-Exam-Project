@@ -71,20 +71,5 @@ window.onload=function(){
     document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
 //End Submit
 
-// New Exam
-
-    function createExamClicked(event)
-    {
-
-        const examId = event.target.getAttribute('exam-id');
-
-        axios.post('/courses/exams/newExam',{ })//remove//.then(response => location.reload());
-    }
-    document.getElementById("createExam").addEventListener("click", createExamClicked, false);
-
-//End New Exam
-
-
-
 }
 

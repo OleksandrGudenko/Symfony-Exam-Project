@@ -1,12 +1,9 @@
 {% extends 'base.html.twig' %}
 
-
 {% block main %}
 
-    Edit exam {{ examData.name }}
-    <br>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 
-    <input type="text" value="{{ examData.name }}">
-    <button type="submit" class="btn btn-warning">Confirm</button>
-    <a href="/courses/">Cancel</a>
 {% endblock %}

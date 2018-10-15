@@ -60,11 +60,7 @@ class QuestionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             if($form->get('save')->isClicked())
             {
-                // $form->getData() holds the submitted values
-                // but, the original `$task` variable has also been updated
                 $question = $form->getData();
-                // ... perform some action, such as saving the task to the database
-                // for example, if Task is a Doctrine entity, save it!
                 $entityManager->persist($question);
                 $entityManager->flush();
                 return $this->redirectToRoute('updateQuestion', ['questionId' => $questionId]);
