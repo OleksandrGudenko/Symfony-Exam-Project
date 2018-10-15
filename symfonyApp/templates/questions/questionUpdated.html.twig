@@ -8,6 +8,8 @@
         Successfully updated question!
     </div>
     <div>
-        <a href="/courses/questions/{{ question.course.id }}" class="btn btn-primary" role="button">Go </a>
+        <a href="/courses/questions/answers/add/{{ question.id }}" class="btn btn-success" role="button">Create Answer</a>
+        <a href="/courses/questions/answers/{{ question.id }}" class="btn btn-warning" role="button">View Existing Answers</a>
+        <a href="/courses/questions/{{ question.course.id }}" class="btn btn-primary" role="button">Back to Questions</a>
     </div>
 {% endblock %}

@@ -70,6 +70,7 @@ class ExamController extends AbstractController
         return new Response();
     }
 
+
     public function students($examId)
     {
         $user = $this->getUser();
@@ -85,22 +86,11 @@ class ExamController extends AbstractController
             $student->setInstances($instances);
         }
 
-        //$instances = $this->getDoctrine()->getRepository(Examinstance::class)->findBy(['exam' => $examId]);
-
-        //$instanceFilter = [];
-
-        //foreach ($instances as $instanceId){
-        //    array_push($instanceFilter,$instanceId->getUser()->getId());
-        //}
-
-
         return $this->render('exams/students.html.twig',
-
             array(  'students'  => $students,
                     'exam'      => $examId,
                     'user'      => $user,
-                    )
-        );
+                    )   );
     }
 
 
@@ -115,6 +105,7 @@ class ExamController extends AbstractController
 
 
     }
+
     public function publishExam($examId, $studentId)
     {
         $student = $this->getDoctrine()->getRepository(User::class)->find($studentId);
@@ -148,6 +139,20 @@ class ExamController extends AbstractController
         return $this->render('exams/take.html.twig',
             array(  'instance'  => $instance,
                     'user'      => $user)
+        );
+    }
+
+    public function examResults($examId)
+    {
+        $user = $this->getUser();
+
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $instances = $this->getDoctrine()->getRepository(Examinstance::class)->findBy(['exam'=>$exam]);
+
+        return $this->render('exams/studentsResults.html.twig',
+            array(  'instances' => $instances,
+                    'user'      => $user
+            )
         );
     }
 
@@ -226,7 +231,6 @@ class ExamController extends AbstractController
                     $manager->flush();
                 }
             }
-
         }
 
         $instance = $this->getInstance($examInstance);

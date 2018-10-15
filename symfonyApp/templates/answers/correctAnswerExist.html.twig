@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    {{ parent() }}
+
+    <div>
+        Answer successfully stored as incorrect because "correct" answer already exist.<br>
+        Please edit correct answer manually.
+    </div>
+    <div>
+        <a href="/courses/questions/answers/add/{{ answer.question.id }}" class="btn btn-success" role="button">Create Another Answer</a>
+        <a href="/courses/questions/answers/{{ answer.question.id }}" class="btn btn-primary" role="button">Go Back to Answers</a>
+    </div>
+{% endblock %}

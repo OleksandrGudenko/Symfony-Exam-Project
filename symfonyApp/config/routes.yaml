@@ -34,10 +34,6 @@ updateQuestion:
     requirements:
         id: '\d+'
 
-questionAddNew:
-    path: /courses/questions/add/addNew
-    controller: App\Controller\QuestionController::questionAddNew
-
 viewQuestion:
     path: /courses/questions/edit/{questionId}/view
     controller: App\Controller\QuestionController::viewQuestion
@@ -45,6 +41,41 @@ viewQuestion:
         id: '\d+'
 
 #End Questions
+
+#Answer
+
+answers:
+    path: /courses/questions/answers/{questionId}
+    controller: App\Controller\AnswerController::answers
+
+newAnswerForm:
+  path: /courses/questions/answers/new
+  controller: App\Controller\AnswerController:viewAnswer
+
+
+addAnswer:
+  path: /courses/questions/answers/add/{questionId}
+  controller: App\Controller\AnswerController::addAnswer
+
+updateAnswer:
+  path: /courses/questions/answers/edit/{answerId}/success
+  controller: App\Controller\AnswerController::updateAnswer
+  requirements:
+    id: '\d+'
+
+correctAnswerExist:
+  path: /courses/questions/answers/edit/{answerId}/exist
+  controller: App\Controller\AnswerController::correctAnswerExist
+  requirements:
+    id: '\d+'
+
+viewAnswer:
+  path: /courses/questions/answers/edit/{answerId}/view
+  controller: App\Controller\AnswerController::viewAnswer
+  requirements:
+    id: '\d+'
+
+#End Answer
 
 #Exams
 exams:
@@ -54,6 +85,10 @@ exams:
 studentsPublish:
     path: /courses/exams/students/{examId}
     controller: App\Controller\ExamController::students
+
+examResults:
+    path: /courses/exams/students/results/{examId}
+    controller: App\Controller\ExamController::examResults
 
 publishAll:
     path: /courses/exams/students/publishAll/
