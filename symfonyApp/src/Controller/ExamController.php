@@ -70,21 +70,6 @@ class ExamController extends AbstractController
         return new Response();
     }
 
-    public function students($examId)
-    {
-        $user = $this->getUser();
-
-        $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
-        $user = $this->getUser();
-
-        return $this->render('exams/students.html.twig',
-
-            array(  'students'  => $students,
-                    'exam'      => $examId,
-                    'user'      => $user)
-        );
-    }
-
     public function publishExam($examId, $studentId)
     {
         $student = $this->getDoctrine()->getRepository(User::class)->find($studentId);
@@ -98,9 +83,6 @@ class ExamController extends AbstractController
             $question->setAnswers($answers);
         }
 
-        $user = $this->getUser();
-        $manager = $this->getDoctrine()->getManager();
-
         $instance = new Examinstance();
         $instance->setUser($student);
         $instance->setExam($exam);
@@ -108,7 +90,6 @@ class ExamController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($instance);
         $manager->flush();
-
 
         return new Response();
     }
@@ -122,6 +103,20 @@ class ExamController extends AbstractController
         return $this->render('exams/take.html.twig',
             array(  'instance'  => $instance,
                     'user'      => $user)
+        );
+    }
+
+    public function examResults($examId)
+    {
+        $user = $this->getUser();
+
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $instances = $this->getDoctrine()->getRepository(Examinstance::class)->findBy(['exam'=>$exam]);
+
+        return $this->render('exams/studentsResults.html.twig',
+            array(  'instances' => $instances,
+                    'user'      => $user
+            )
         );
     }
 
@@ -200,7 +195,6 @@ class ExamController extends AbstractController
                     $manager->flush();
                 }
             }
-
         }
 
         $instance = $this->getInstance($examInstance);

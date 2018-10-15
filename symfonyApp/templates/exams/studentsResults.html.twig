@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    <div class="main" align="center">
+        <h3>Students</h3>
+        <br>
+        <table class="table table-hover table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Results</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for student in students %}
+            {% if student.instances|length == 0 %}
+                <td>do your thing</td>
+
+            {% for instance in instances %}
+                {% if instance.grade %}
+                <tr>
+                    <td scope="row">{{ instance.user.id }}</td>
+                    <td>{{ instance.user.firstname }} </td>
+                    <td>{{ instance.user.lastname }}</td>
+                    <td>{{ instance.grade }}%</td>
+                    <td><a examId="{{ instance.id }}" href="/courses/exams/result/{{ instance.id }}" class="btn btn-primary" role="button">Result</a></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

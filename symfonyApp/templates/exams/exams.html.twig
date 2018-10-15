@@ -24,9 +24,10 @@
             {% if user.teacher %}
             <th scope="col">Publish</th>
             <th scope="col">Edit</th>
+            <th scope="col">Results</th>
             {% else %}
             <th scope="col">Do</th>
-            <th scope="col">View Results</th>
+            <th scope="col">Results</th>
             {% endif %}
         </tr>
 
@@ -46,6 +47,7 @@
 
             <td><a examId="{{ instance.id }}" href="/courses/exams/students/{{ instance.id }}" class="btn btn-primary" role="button">Publish</a></td>
             <td><a examId="{{ instance.id }}" href="/courses/exams/edit/{{ instance.id }}" class="btn btn-warning" role="button">Edit</a></td>
+            <td><a examId="{{ instance.id }}" href="/courses/exams/students/results/{{ instance.id }}" class="btn btn-warning" role="button">Results</a></td>
 
             {% else %}
 
@@ -56,7 +58,7 @@
             <td>{{ user.username }} </td>
 
             <td><a examId="{{ instance.id }}" href="/courses/exams/take/{{ instance.id }}" class="btn btn-warning" role="button">Do</a></td>
-            <td><a examId="{{ instance.id }}" href="/courses/exams/result/{{ instance.id }}" class="btn btn-primary" role="button">View Result</a></td>
+            <td><a examId="{{ instance.id }}" href="/courses/exams/result/{{ instance.id }}" class="btn btn-primary" role="button">Result</a></td>
 
             {% endif %}
         </tr>
