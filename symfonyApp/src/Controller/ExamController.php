@@ -70,19 +70,40 @@ class ExamController extends AbstractController
         return new Response();
     }
 
+
     public function students($examId)
     {
         $user = $this->getUser();
 
         $students = $this->getDoctrine()->getRepository(User::class)->findBy(['teacher' => 0]);
-        $user = $this->getUser();
+
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+
+        foreach ($students as $student)
+        {
+            $instances = $this->getDoctrine()->getRepository(Examinstance::class)->findBy(array('exam'=>$exam, 'user'=>$student));
+
+            $student->setInstances($instances);
+        }
 
         return $this->render('exams/students.html.twig',
-
             array(  'students'  => $students,
                     'exam'      => $examId,
-                    'user'      => $user)
-        );
+                    'user'      => $user,
+                    )   );
+    }
+
+
+    public function publishAll(Request $request)
+    {
+        $user = $this->getUser();
+        $data = $request->getContent();
+        $publishData = json_decode($data, true);
+
+
+        return new Response();
+
+
     }
 
     public function publishExam($examId, $studentId)
@@ -98,9 +119,6 @@ class ExamController extends AbstractController
             $question->setAnswers($answers);
         }
 
-        $user = $this->getUser();
-        $manager = $this->getDoctrine()->getManager();
-
         $instance = new Examinstance();
         $instance->setUser($student);
         $instance->setExam($exam);
@@ -108,7 +126,6 @@ class ExamController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($instance);
         $manager->flush();
-
 
         return new Response();
     }
@@ -122,6 +139,20 @@ class ExamController extends AbstractController
         return $this->render('exams/take.html.twig',
             array(  'instance'  => $instance,
                     'user'      => $user)
+        );
+    }
+
+    public function examResults($examId)
+    {
+        $user = $this->getUser();
+
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $instances = $this->getDoctrine()->getRepository(Examinstance::class)->findBy(['exam'=>$exam]);
+
+        return $this->render('exams/studentsResults.html.twig',
+            array(  'instances' => $instances,
+                    'user'      => $user
+            )
         );
     }
 
@@ -200,7 +231,6 @@ class ExamController extends AbstractController
                     $manager->flush();
                 }
             }
-
         }
 
         $instance = $this->getInstance($examInstance);

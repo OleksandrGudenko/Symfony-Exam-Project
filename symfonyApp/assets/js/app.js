@@ -63,6 +63,23 @@ window.onload=function()
     publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
 //End Publish
 
+
+//PublishALl
+    function publishAllButtonClicked(event)
+    {
+        let studentIds = [];
+        const examId = event.target.getAttribute('exam-id');
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; ++i) {
+                studentIds.push(inputs[i].id);
+        }
+        axios.post('/courses/exams/students/publishAll/',{examId :examId, studentIds :studentIds})//.then(response => location.reload());
+    }
+    let publishAllButtons = document.querySelectorAll('.publishAllButton');
+    publishAllButtons.forEach(button => button.addEventListener('click', publishAllButtonClicked));
+//End PublishAll
+
+
 //Submit
     function submitButtonClicked()
     {
@@ -83,7 +100,7 @@ window.onload=function()
 
         let instance = document.getElementById("instanceId").value;
 
-        axios.post('/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
+        axios.post('/courses/exams/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
 
     }
 

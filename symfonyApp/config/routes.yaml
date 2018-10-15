@@ -82,9 +82,17 @@ exams:
     path: /courses/exams/{courseId}
     controller: App\Controller\ExamController::exams
 
-studentsExam:
+studentsPublish:
     path: /courses/exams/students/{examId}
     controller: App\Controller\ExamController::students
+
+examResults:
+    path: /courses/exams/students/results/{examId}
+    controller: App\Controller\ExamController::examResults
+
+publishAll:
+    path: /courses/exams/students/publishAll/
+    controller: App\Controller\ExamController::publishAll
 
 publishExam:
     path: /courses/exams/students/publish/{examId}/{studentId}
@@ -103,7 +111,7 @@ takeExam:
     controller: App\Controller\ExamController::takeExam
 
 completeExam:
-    path: /complete
+    path: /courses/exams/complete
     controller: App\Controller\ExamController::completeExam
     methods: [POST]
 
@@ -115,7 +123,7 @@ result:
 
 #Students
 students:
-    path: /students
+    path: /students/
     controller: App\Controller\StudentController::students
 #End Students
 
