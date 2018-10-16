@@ -104,13 +104,13 @@ editExam:
     path: /courses/exams/edit/{examId}
     controller: App\Controller\ExamController::editExam
 
-addQuestionToExam:
-    path: /courses/exams/edit/{examId}/{questionId}
-    controller: App\Controller\ExamController::addQuestionToExam
-
 updateExam:
     path: /courses/exams/edit/{examId}/success
     controller: App\Controller\ExamController::updateExam
+
+addQuestionToExam:
+    path: /courses/exams/edit/{examId}/{questionId}
+    controller: App\Controller\ExamController::addQuestionToExam
 
 questionsExam:
     path: /courses/exams/questions/{examId}

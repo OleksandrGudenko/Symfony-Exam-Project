@@ -63,7 +63,7 @@ class ExamController extends AbstractController
 
     public function editExam(Request $request, $examId)
     {
-        $exam = $this->getDoctrine()->getManager()->getRepository(Exam::class)->find($examId);
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
         $user = $this->getUser();
         $form = $this->createFormBuilder($exam)
             ->add('name', TextType::class, array('label' => 'Exam Name'))
@@ -75,12 +75,10 @@ class ExamController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             if($form->get('save')->isClicked())
             {
-                $exam = $form->getData();
                 $entityManager->persist($exam);
                 $entityManager->flush();
-                return $this->redirectToRoute('updateExam', ['examId' => $examId]);
+                return $this->redirectToRoute('updateExam', ['examId' => 1]);
             }
-
         }
         return $this->render('exams/edit.html.twig', [
             'examId' => $examId,
@@ -90,14 +88,17 @@ class ExamController extends AbstractController
     }
 
     public function updateExam($examId){
-        $exam = $this->getDoctrine()->getManager()->getRepository(Exam::class)->find($examId);
+
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
         $user = $this->getUser();
         $courseId = $exam->getCourse()->getId();
+
 
         return $this->render('exams/updateExam.html.twig',
             ['exam' => $exam,
              'user'=> $user,
              'courseId' => $courseId]);
+
     }
 
     public function questionsExam($examId)
@@ -340,6 +341,10 @@ class ExamController extends AbstractController
         }
 
         $result = ($correctAnswers / count($answersGiven) * 100);
+
+        if($result == null)
+            $result = 1;
+
         return $result;
     }
 }
