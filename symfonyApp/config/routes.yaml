@@ -127,12 +127,6 @@ result:
 
 #End Exams
 
-#Students
-students:
-    path: /students/
-    controller: App\Controller\StudentController::students
-#End Students
-
 login:
     path: /login
 
