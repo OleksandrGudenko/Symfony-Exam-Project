@@ -17,6 +17,19 @@ import axios from 'axios';
 window.onload=function(){
 
 //Publish
+    function addQuestionButtonClicked(event)
+    {
+        const questionId = event.target.getAttribute('question-id');
+        const examId = event.target.getAttribute('exam-id');
+        axios.post('/courses/exams/edit/' + examId + '/' + questionId)
+            .then(response => location.reload());
+    }
+    let addQuestionButtons = document.querySelectorAll('.addQuestionButton');
+    addQuestionButtons.forEach(button => button.addEventListener('click', addQuestionButtonClicked));
+//End Publish
+
+//Add Question
+
     function publishButtonClicked(event)
     {
         const studentId = event.target.getAttribute('student-id');
@@ -26,8 +39,8 @@ window.onload=function(){
     }
     let publishButtons = document.querySelectorAll('.publishButton');
     publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
-//End Publish
 
+//End Add Question
 
 //PublishAll
     function publishAllButtonClicked(event)

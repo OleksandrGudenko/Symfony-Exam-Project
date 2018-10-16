@@ -109,14 +109,38 @@ class ExamController extends AbstractController
         $examQuestions = $this->getDoctrine()->getRepository(Examquestion::class)->findBy(array('exam' => $exam));
         $exam->setQuestions($examQuestions);
 
+        $myArray = array();
+
+        foreach($examQuestions as $question)
+        {
+            array_push($myArray, $question->getQuestion());
+        }
+
         $user = $this->getUser();
 
         return $this->render('exams/questions.html.twig',
             ['user'=> $user,
              'questions' => $questions,
+             'examQuestions' => $myArray,
              'exam' => $exam   ]);
     }
 
+    public function addQuestionToExam($examId, $questionId)
+    {
+        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($examId);
+        $question = $this->getDoctrine()->getRepository(Question::class)->find($questionId);
+
+        $examQuestion = new Examquestion();
+
+        $examQuestion->setExam($exam);
+        $examQuestion->setQuestion($question);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($examQuestion);
+        $manager->flush();
+
+        return new Response();
+    }
 
     public function students($examId)
     {
