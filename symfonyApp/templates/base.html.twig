@@ -10,7 +10,7 @@
                             <nav id="sidebar">
                                 <div class="sidebar-header">
 
-                                    <h3>Welcome</h3>
+                                    <h3>Welcome {{ user.firstname }}</h3>
                                 </div>
 
                                 <div id="content">
@@ -18,11 +18,6 @@
                                         <li>
                                             <a href="/courses" role="button">Courses</a>
                                         </li>
-                                        {% if user.teacher %}
-                                        <li>
-                                            <a href="/students" role="button">Students</a>
-                                        </li>
-                                        {% endif %}
                                         <li>
                                             <a href="/logout" role="button">Logout</a>
                                         </li>

@@ -14,44 +14,22 @@ require('../images/todo.ico');
 
 import axios from 'axios';
 
-
-//Break Browser Navigation
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-    history.go(1);
-};
-
-
-window.onload=function()
-{
-
-
-
-    //Delete
-    function deleteButtonClicked(event)
-    {
-        const itemId = event.target.getAttribute('data-id');
-
-        // send the HTTP REQ
-        axios.delete('/todoList/deleteItem/' + itemId)
-            .then(response => window.location.href = window.location.href);
-    }
-    let deleteButtons = document.querySelectorAll('.deleteButton');
-    deleteButtons.forEach(button => button.addEventListener('click', deleteButtonClicked));
-//End Delete
-
-//Complete
-    function completeButtonClicked(event)
-    {
-        const itemId = event.target.getAttribute('data-id');
-        axios.post('/todoList/item/' + itemId + '/toggleIsDone')
-            .then(response => window.location.href = window.location.href);
-    }
-    let isDoneButtons = document.querySelectorAll('.completeButton');
-    isDoneButtons.forEach(button => button.addEventListener('click', completeButtonClicked));
-//End Complete
+window.onload=function(){
 
 //Publish
+    function addQuestionButtonClicked(event)
+    {
+        const questionId = event.target.getAttribute('question-id');
+        const examId = event.target.getAttribute('exam-id');
+        axios.post('/courses/exams/edit/' + examId + '/' + questionId)
+            .then(response => location.reload());
+    }
+    let addQuestionButtons = document.querySelectorAll('.addQuestionButton');
+    addQuestionButtons.forEach(button => button.addEventListener('click', addQuestionButtonClicked));
+//End Publish
+
+//Add Question
+
     function publishButtonClicked(event)
     {
         const studentId = event.target.getAttribute('student-id');
@@ -61,10 +39,10 @@ window.onload=function()
     }
     let publishButtons = document.querySelectorAll('.publishButton');
     publishButtons.forEach(button => button.addEventListener('click', publishButtonClicked));
-//End Publish
 
+//End Add Question
 
-//PublishALl
+//PublishAll
     function publishAllButtonClicked(event)
     {
         let studentIds = [];
@@ -73,7 +51,7 @@ window.onload=function()
         for (let i = 0; i < inputs.length; ++i) {
                 studentIds.push(inputs[i].id);
         }
-        axios.post('/courses/exams/students/publishAll/',{examId :examId, studentIds :studentIds})//.then(response => location.reload());
+        axios.post('/courses/exams/students/publishAll/',{examId :examId, studentIds :studentIds}).then(response => location.reload());
     }
     let publishAllButtons = document.querySelectorAll('.publishAllButton');
     publishAllButtons.forEach(button => button.addEventListener('click', publishAllButtonClicked));
@@ -90,7 +68,6 @@ window.onload=function()
             if (inputs[i].checked) {
                 question.push(inputs[i].id);
                 answer.push(inputs[i].value);
-
             }
         }
         let result =  {};
@@ -100,11 +77,12 @@ window.onload=function()
 
         let instance = document.getElementById("instanceId").value;
 
-        axios.post('/courses/exams/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
+        axios.post('/complete',{ result: result, instance:instance }).then(response => window.location =  '/courses/exams/result/'+instance);
 
     }
 
     document.getElementById("submitButton").addEventListener("click", submitButtonClicked, false);
 //End Submit
+
 }
 

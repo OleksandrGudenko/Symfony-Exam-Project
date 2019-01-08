@@ -28,22 +28,66 @@ class ExamUserFixtures extends Fixture
         $teacherUser = new User();
         $teacherUser->setUsername('Teacher');
         $teacherUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
-        $teacherUser->setFirstname('Teacherfn');
-        $teacherUser->setLastname('Teacherln');
+        $teacherUser->setFirstname('John');
+        $teacherUser->setLastname('Smith');
+        $teacherUser->setTeacher('1');
+        $manager->persist($teacherUser);
+
+        $teacherUser = new User();
+        $teacherUser->setUsername('Teacher2');
+        $teacherUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $teacherUser->setFirstname('Mike');
+        $teacherUser->setLastname('Turner');
         $teacherUser->setTeacher('1');
         $manager->persist($teacherUser);
 
         $studentUser = new User();
-        $studentUser->setUsername('Student');
+        $studentUser->setUsername('Student1');
         $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
-        $studentUser->setFirstname('Studentfn');
-        $studentUser->setLastname('Studentln');
+        $studentUser->setFirstname('Jamie');
+        $studentUser->setLastname('Burns');
+        $studentUser->setTeacher('0');
+        $manager->persist($studentUser);
+
+        $studentUser = new User();
+        $studentUser->setUsername('Student2');
+        $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $studentUser->setFirstname('Florian');
+        $studentUser->setLastname('Brandsma');
+        $studentUser->setTeacher('0');
+        $manager->persist($studentUser);
+
+        $studentUser = new User();
+        $studentUser->setUsername('Student3');
+        $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $studentUser->setFirstname('Oleksandr');
+        $studentUser->setLastname('Gudenko');
+        $studentUser->setTeacher('0');
+        $manager->persist($studentUser);
+
+        $studentUser = new User();
+        $studentUser->setUsername('Student4');
+        $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $studentUser->setFirstname('Laurence');
+        $studentUser->setLastname('Tureaud');
+        $studentUser->setTeacher('0');
+        $manager->persist($studentUser);
+
+        $studentUser = new User();
+        $studentUser->setUsername('Student5');
+        $studentUser->setPassword(password_hash('test', PASSWORD_BCRYPT));
+        $studentUser->setFirstname('Chuck');
+        $studentUser->setLastname('Norris');
         $studentUser->setTeacher('0');
         $manager->persist($studentUser);
 
         $testCourse = new Course();
         $testCourse->setCourseName('PHP');
         $manager->persist($testCourse);
+
+        $testCourse2 = new Course();
+        $testCourse2->setCourseName('JavaScript');
+        $manager->persist($testCourse2);
 
         $testCourse1 = new Course();
         $testCourse1->setCourseName('Finnish');

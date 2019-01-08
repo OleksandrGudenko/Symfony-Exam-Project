@@ -23,7 +23,6 @@ newQuestionForm:
     path: /courses/question/new
     controller: App\Controller\QuestionController:viewQuestion
 
-
 addQuestion:
     path: /courses/question/add/{courseId}
     controller: App\Controller\QuestionController::addQuestion
@@ -51,7 +50,6 @@ answers:
 newAnswerForm:
   path: /courses/questions/answers/new
   controller: App\Controller\AnswerController:viewAnswer
-
 
 addAnswer:
   path: /courses/questions/answers/add/{questionId}
@@ -98,20 +96,32 @@ publishExam:
     path: /courses/exams/students/publish/{examId}/{studentId}
     controller: App\Controller\ExamController::publishExam
 
+createExam:
+    path: /courses/exams/add/{courseId}
+    controller: App\Controller\ExamController::createExam
+
 editExam:
     path: /courses/exams/edit/{examId}
     controller: App\Controller\ExamController::editExam
 
-deleteExam:
-    path: /courses/exams/delete/{examId}
-    controller: App\Controller\ExamController::deleteExam
+updateExam:
+    path: /courses/exams/edit/{examId}/success
+    controller: App\Controller\ExamController::updateExam
+
+addQuestionToExam:
+    path: /courses/exams/edit/{examId}/{questionId}
+    controller: App\Controller\ExamController::addQuestionToExam
+
+questionsExam:
+    path: /courses/exams/questions/{examId}
+    controller: App\Controller\ExamController::questionsExam
 
 takeExam:
     path: /courses/exams/take/{instanceId}
     controller: App\Controller\ExamController::takeExam
 
 completeExam:
-    path: /courses/exams/complete
+    path: /complete
     controller: App\Controller\ExamController::completeExam
     methods: [POST]
 
@@ -120,12 +130,6 @@ result:
       controller: App\Controller\ExamController::result
 
 #End Exams
-
-#Students
-students:
-    path: /students/
-    controller: App\Controller\StudentController::students
-#End Students
 
 login:
     path: /login
